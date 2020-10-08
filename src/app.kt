@@ -5,7 +5,7 @@ fun main(args: Array<String>){
         val Str1: String = readLine().toString()
         List = Str1.split(" ").toTypedArray()
     }else{
-        List=args
+        List = args
     }
     //endregion
 

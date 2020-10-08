@@ -1,63 +1,52 @@
-fun main(args: Array<String>){
-    var List: Array<String>
+fun main(args: Array<String>) {
     //region 6 задание
-    if(args.size==0){
-        val Str1: String = readLine().toString()
-        List = Str1.split(" ").toTypedArray()
-    }else{
-        List = args
-    }
+    val list: Array<String> =  if(args.isEmpty()) // если через параметр ничего не пришло, читаем поток stdin
+    {readLine().toString().split(" ").toTypedArray()}
+    else{args}
     //endregion
-
     //region 1 задание
     println("Задание 1:")
-    for (i in List){
-        println(i)
-    }
+    list.forEach(::println)
     //endregion
     //region 2 задание
     println("Задание 2:")
-    var ListSort = List.sorted()
-    for (i in ListSort){
-        println(i)
-    }
+    val listSort = list.sorted()
+    listSort.forEach(::println)
     //endregion
     //region 3 задание
     println("Задание 3:")
-    val ListUnique : MutableList<String> = mutableListOf()
-    var Check1: Boolean = true
-    for(element in ListSort){
-        Check1 = !ListUnique.contains(element)
-        if (Check1){
-            ListUnique.add(element)
+    val listUnique: MutableList<String> = mutableListOf()
+    var check1: Boolean = true
+    for (element in listSort) {
+        check1 = !listUnique.contains(element)
+        if (check1) {
+            listUnique.add(element)
         }
     }
-    for (i in ListUnique){
-        println(i)
-    }
+    listUnique.forEach(::println)
     //endregion
     //region 4 задание
     println("Задание 4:")
-    var MapCollection: MutableMap<String, Int> = mutableMapOf()
-    var CountRepeat: Int = 0
-    for(element in ListUnique){
-        CountRepeat = 0
-        for (element1 in ListSort){
-            if (element == element1){
-                CountRepeat++
+    var mapCollection: MutableMap<String, Int> = mutableMapOf()
+    var countRepeat: Int = 0
+    for (element in listUnique) { // берем элемент с массива уникальных
+        countRepeat = 0
+        for (element1 in listSort) { // считаем кол-во соовпадений с фулл массивом
+            if (element == element1) {
+                countRepeat++
             }
         }
-        MapCollection.put(element, CountRepeat)
+        mapCollection.put(element, countRepeat) // добавляем элемент с количесвтом его повторений в map-коллекцию
     }
-    for (i in MapCollection){
-        println(i.key+" "+ i.value)
+    for (i in mapCollection) {
+        println(i.key + " " + i.value)
     }
     //endregion
     //region 5 задание
-    val result = MapCollection.toList().sortedByDescending { (_, value) -> value}.toMap()
+    val result = mapCollection.toList().sortedByDescending { (_, value) -> value }.toMap()
     println("Задание 5:")
-    for (i in result){
-        println(i.key+" "+ i.value)
+    for (i in result) {
+        println(i.key + " " + i.value)
     }
     //endregion
 }

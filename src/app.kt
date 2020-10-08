@@ -48,5 +48,7 @@ fun main(args: Array<String>) {
     for (i in result) {
         println(i.key + " " + i.value)
     }
+    println("Нажмите на Enter")
+    readLine()
     //endregion
 }

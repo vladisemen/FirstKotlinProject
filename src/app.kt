@@ -27,7 +27,6 @@ fun main(args: Array<String>){
     val ListUnique : MutableList<String> = mutableListOf()
     var Check1: Boolean = true
     for(element in ListSort){
-        Check1 = true
         Check1 = !ListUnique.contains(element)
         if (Check1){
             ListUnique.add(element)

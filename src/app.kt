@@ -15,6 +15,7 @@ fun main(args: Array<String>) {
     //endregion
     //region 3 задание
     println("Задание 3:")
+            /*
     val listUnique: MutableList<String> = mutableListOf()
     var check1: Boolean = true
     for (element in listSort) {
@@ -22,6 +23,11 @@ fun main(args: Array<String>) {
         if (check1) {
             listUnique.add(element)
         }
+    }
+             */
+    var listUnique: MutableSet<String> = mutableSetOf()
+    for (element in listSort){
+        listUnique.add(element)
     }
     listUnique.forEach(::println)
     //endregion

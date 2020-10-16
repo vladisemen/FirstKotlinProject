@@ -13,10 +13,7 @@ fun main(args: Array<String>) {
     //endregion
     //region 2 задание
     println("Задание 2:")
-    val listSort = list.sorted()
-    listSort.forEach(::println)
-    //endregion
-    //region 3 задание
+    list.sorted().forEach(::println)
     println("Задание 3:")
     val listUnique: MutableSet<String> = mutableSetOf()
     for (element in listSort) {

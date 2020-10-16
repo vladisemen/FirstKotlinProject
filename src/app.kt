@@ -15,13 +15,8 @@ fun main(args: Array<String>) {
     println("Задание 2:")
     list.sorted().forEach(::println)
     println("Задание 3:")
-    val listUnique: MutableSet<String> = mutableSetOf()
-    for (element in listSort) {
-        listUnique.add(element)
-    }
-    listUnique.forEach(::println)
-    //endregion
-    //region 4 задание
+    list.sorted().toSet().forEach(::println)
+
     println("Задание 4:")
     val mapCollection: MutableMap<String, Int> = mutableMapOf()
     var countRepeat: Int

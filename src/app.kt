@@ -13,12 +13,13 @@ fun main(args: Array<String>) {
     //endregion
     //region 2 задание
     println("Задание 2:")
-    list.sorted().forEach(::println)
+    val listSort = list.sorted()
+    listSort.forEach(::println)
     //endregion
     //region 3 задание
     println("Задание 3:")
     val listUnique: MutableSet<String> = mutableSetOf()
-    for (element in list.sorted()) {
+    for (element in listSort) {
         listUnique.add(element)
     }
     listUnique.forEach(::println)
@@ -30,7 +31,7 @@ fun main(args: Array<String>) {
     listUnique.forEach { element ->
         // берем элемент с массива уникальных
         countRepeat = 0
-        for (element1 in list.sorted()) { // считаем кол-во соовпадений с фулл массивом
+        for (element1 in listSort) { // считаем кол-во соовпадений с фулл массивом
             if (element == element1) {
                 countRepeat++
             }

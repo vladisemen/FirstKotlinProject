@@ -22,15 +22,14 @@ fun main(args: Array<String>) {
     //region 4 задание
     println("Задание 4:")
     val mapCollection = list.sorted().groupingBy { it }.eachCount()
-    for (i in mapCollection) {
-        println(i.key + " " + i.value)
-    }
+    printCollection(mapCollection)
     //endregion
     //region 5 задание
-    val result = mapCollection.toList().sortedByDescending { (_, value) -> value }.toMap()
     println("Задание 5:")
-    for (i in result) {
-        println(i.key + " " + i.value)
-    }
+    val result = mapCollection.toList().sortedByDescending { (_, value) -> value }.toMap()
+    printCollection(result)
     //endregion
+}
+fun printCollection(collection: Map<String, Int>) {
+    for (item in collection) println("${item.key} ${item.value}")
 }

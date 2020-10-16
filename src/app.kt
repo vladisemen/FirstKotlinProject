@@ -18,6 +18,16 @@ fun main(args: Array<String>) {
     //endregion
     //region 3 задание
     println("Задание 3:")
+    /*
+val listUnique: MutableList<String> = mutableListOf()
+var check1: Boolean = true
+for (element in listSort) {
+check1 = !listUnique.contains(element)
+if (check1) {
+    listUnique.add(element)
+}
+}
+     */
     val listUnique: MutableSet<String> = mutableSetOf()
     for (element in listSort) {
         listUnique.add(element)

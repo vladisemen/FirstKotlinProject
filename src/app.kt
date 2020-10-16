@@ -18,24 +18,8 @@ fun main(args: Array<String>) {
     list.sorted().toSet().forEach(::println)
 
     println("Задание 4:")
-    val mapCollection: MutableMap<String, Int> = mutableMapOf()
-    var countRepeat: Int
-    listUnique.forEach { element ->
-        // берем элемент с массива уникальных
-        countRepeat = 0
-        for (element1 in listSort) { // считаем кол-во соовпадений с фулл массивом
-            if (element == element1) {
-                countRepeat++
-            }
-        }
-        mapCollection[element] = countRepeat // добавляем элемент с количесвтом его повторений в map-коллекцию
-    }
-    for (i in mapCollection) {
-        println(i.key + " " + i.value)
-    }
-    //endregion
-    //region 5 задание
-    val result = mapCollection.toList().sortedByDescending { (_, value) -> value }.toMap()
+    val mapCollection = list.sorted().groupingBy { it }.eachCount()
+    printCollection(mapCollection)
     println("Задание 5:")
     for (i in result) {
         println(i.key + " " + i.value)

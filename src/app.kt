@@ -17,26 +17,11 @@ fun main(args: Array<String>) {
     //endregion
     //region 3 задание
     println("Задание 3:")
-    val listUnique: MutableSet<String> = mutableSetOf()
-    for (element in list.sorted()) {
-        listUnique.add(element)
-    }
-    listUnique.forEach(::println)
+    list.sorted().toSet().forEach(::println)
     //endregion
     //region 4 задание
     println("Задание 4:")
-    val mapCollection: MutableMap<String, Int> = mutableMapOf()
-    var countRepeat: Int
-    listUnique.forEach { element ->
-        // берем элемент с массива уникальных
-        countRepeat = 0
-        for (element1 in list.sorted()) { // считаем кол-во соовпадений с фулл массивом
-            if (element == element1) {
-                countRepeat++
-            }
-        }
-        mapCollection[element] = countRepeat // добавляем элемент с количесвтом его повторений в map-коллекцию
-    }
+    val mapCollection = list.sorted().groupingBy { it }.eachCount()
     for (i in mapCollection) {
         println(i.key + " " + i.value)
     }

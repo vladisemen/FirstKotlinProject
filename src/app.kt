@@ -21,8 +21,10 @@ fun main(args: Array<String>) {
     val mapCollection = list.sorted().groupingBy { it }.eachCount()
     printCollection(mapCollection)
     println("Задание 5:")
-    for (i in result) {
-        println(i.key + " " + i.value)
-    }
     //endregion
+    val result = mapCollection.toList().sortedByDescending { (_, value) -> value }.toMap()
+    printCollection(result)
+}
+fun printCollection(collection: Map<String, Int>) {
+    for (item in collection) println("${item.key} ${item.value}")
 }

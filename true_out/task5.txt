@@ -1,4 +1,4 @@
-Задание 1:
+requirement 1:
 the
 quick
 brown
@@ -8,7 +8,7 @@ over
 the
 lazy
 dog
-Задание 2:
+requirement 2:
 brown
 dog
 fox
@@ -18,7 +18,7 @@ over
 quick
 the
 the
-Задание 3:
+requirement 3:
 brown
 dog
 fox
@@ -27,7 +27,7 @@ lazy
 over
 quick
 the
-Задание 4:
+requirement 4:
 brown 1
 dog 1
 fox 1
@@ -36,7 +36,7 @@ lazy 1
 over 1
 quick 1
 the 2
-Задание 5:
+requirement 5:
 the 2
 brown 1
 dog 1

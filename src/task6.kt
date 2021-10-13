@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
     list.sorted().forEach(::println)
 
     println("requirement 3:")
-    list.sorted().toSet().forEach(::println)
+    list.sorted().distinct().forEach(::println)
 
     println("requirement 4:")
     val mapCollection = list.sorted().groupingBy { it }.eachCount()

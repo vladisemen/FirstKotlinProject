@@ -5,5 +5,7 @@ fun main(args: Array<String>) {
     } else {
         args
     }
-    list.sorted().groupingBy { it }.eachCount().toList().sortedByDescending { (_, value) -> value }.toMap().forEach{ (k, v) -> println("$k $v")}
+    list.sorted().groupingBy { it }.eachCount().toList()
+        .sortedByDescending { (_, value) -> value }.toMap()
+        .forEach{ (k, v) -> println("$k $v")}
 }

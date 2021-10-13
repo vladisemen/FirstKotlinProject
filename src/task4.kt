@@ -1,4 +1,3 @@
 fun main(args: Array<String>) {
-    val mapCollection = args.sorted().groupingBy { it }.eachCount()
-    printCollection(mapCollection)
+    args.sorted().groupingBy { it }.eachCount().forEach{ (k, v) -> println("$k $v")}
 }

@@ -17,7 +17,7 @@ for /l %%i in (1,1,5) do (
 echo 6 test- input values throught stdin
 echo %TestDate%| java -jar jar/task6.jar > out.txt
 
-fc /a out.txt true_out/task5.txt
+fc /a out.txt true_out/task6.txt
 if ERRORLEVEL 1 (
   echo !Error: 6 test failed!
 ) else (

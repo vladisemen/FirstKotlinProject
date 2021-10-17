@@ -18,7 +18,7 @@ fun transform(color: String): Int {
 fun main() {
 
     // filter a list
-    val list1: List<Int> =  listOf(-2, -1, 0, 1, 2)
+    val list1: List<Int> = listOf(-2, -1, 0, 1, 2)
     val newList = list1.filter { x -> x > 0 }
     println(newList)
     print(list1.filter { it > 0 }) //  same

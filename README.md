@@ -12,7 +12,7 @@
 ##### или так: echo the quick brown fox jumps over the lazy dog | java -jar jar/task6.jar
 ##### Где "the quick brown fox jumps over the lazy dog" - параметры, переданные программе 
 ##  Тесты:
-### Для запуска тестов необходимо запустить ../TEST.bat
+### Для запуска тестов необходимо запустить ../TEST.sh
 
 
 

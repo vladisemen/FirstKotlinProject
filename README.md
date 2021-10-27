@@ -1,3 +1,4 @@
+![example workflow](https://github.com/vladisemen/FirstKotlinProject/actions/workflows/main.yml/badge.svg)
 # Тестовое на Kotlin 
 ##  Установка программы не требуется
 ##  Есть 3 способа запуска программы:

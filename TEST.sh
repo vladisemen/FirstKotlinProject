@@ -13,7 +13,7 @@ if cmp -s out.txt true_out/task$i.txt ; then
 fi
 done
 printf "Tests passed $Count from 6"
-if $Count=6 ; then
+if [ $Count -eq 6 ] ; then
 exit 0 
 else
 exit 1

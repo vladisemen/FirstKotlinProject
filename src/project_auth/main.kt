@@ -1,4 +1,4 @@
-import ProjectAuth.User
+package project_auth
 
 val Users: List<User> = listOf(
     User("admin", "123"),

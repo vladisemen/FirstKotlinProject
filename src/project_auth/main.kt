@@ -11,10 +11,20 @@ fun main(args: Array<String>) {
     } else {
         args
     }
-    if (list.size > 1){
-        val inputLogin = list[0]
-        val inputPass = list[1]
-        println(inputLogin)
-        println(inputPass)
+    val inputLogin = list[0]
+    val inputPass = list[1]
+    println(inputLogin)
+    println(inputPass)
+    val inputUser = Users.find { it.login == inputLogin }
+    if (inputUser == null) {
+        print("Пользователь не найден!")
+        return
     }
+    if (inputUser.pass == inputPass) {
+        print("Аутнетификация успешна")
+    } else {
+        print("Аутентификация неуспешна")
+    }
+
+
 }

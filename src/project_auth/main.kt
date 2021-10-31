@@ -1,5 +1,8 @@
 package project_auth
 
+import java.math.BigInteger
+import java.security.MessageDigest
+
 val Users: List<User> = listOf(
     User("admin", "123"),
     User("user1", "qwerty123")
@@ -26,5 +29,12 @@ fun main(args: Array<String>) {
         print("Аутентификация неуспешна")
     }
 
+}
 
+/**
+ * Вернет хэш строки (MD5)
+ */
+fun getHash(password: String): String {
+    val md = MessageDigest.getInstance("MD5")
+    return BigInteger(1, md.digest(password.toByteArray())).toString(16).padStart(32, '0')
 }

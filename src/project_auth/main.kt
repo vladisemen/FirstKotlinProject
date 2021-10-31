@@ -1,11 +1,12 @@
 package project_auth
 
+import project_auth.models.User
 import java.math.BigInteger
 import java.security.MessageDigest
 
 val Users: List<User> = listOf(
-    User("admin", "123"),
-    User("user1", "qwerty123")
+    User("admin", "202cb962ac59075b964b07152d234b70"), // 123
+    User("user1", "3fc0a7acf087f549ac2b266baf94b8b1")   // qwerty123
 )
 
 fun main(args: Array<String>) {
@@ -23,7 +24,8 @@ fun main(args: Array<String>) {
         print("Пользователь не найден!")
         return
     }
-    if (inputUser.pass == inputPass) {
+
+    if (inputUser.pass == getHash(inputPass)) {
         print("Аутнетификация успешна")
     } else {
         print("Аутентификация неуспешна")

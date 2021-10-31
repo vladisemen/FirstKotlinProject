@@ -29,6 +29,10 @@ fun main(args: Array<String>) {
         collectionParameter.getValue("pass")
     )
 
+    authentication(dataUser)
+}
+
+fun authentication(dataUser: User) {
     println(dataUser.login)
     println(dataUser.pass)
     val userDB = DateBase()
@@ -44,7 +48,6 @@ fun main(args: Array<String>) {
     } else {
         exitCode(4)
     }
-
 }
 
 /**
@@ -63,7 +66,7 @@ fun getHash(password: String): String {
 }
 
 fun exitCode(number: Int) {
-    when(number){
+    when (number) {
         0 -> {
             println("успех")
             System.exit(0)

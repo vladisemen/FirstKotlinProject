@@ -5,8 +5,8 @@ import java.math.BigInteger
 import java.security.MessageDigest
 
 val Users: List<User> = listOf(
-    User("admin", "202cb962ac59075b964b07152d234b70"), // 123
-    User("user1", "3fc0a7acf087f549ac2b266baf94b8b1")   // qwerty123
+    User("admin", "202cb962ac59075b964b07152d234b70", "Salt"), // 123
+    User("user1", "3fc0a7acf087f549ac2b266baf94b8b1", "Salt")   // qwerty123
 )
 
 fun main(args: Array<String>) {

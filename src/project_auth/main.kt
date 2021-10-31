@@ -1,13 +1,7 @@
 package project_auth
 
-import project_auth.models.User
 import java.math.BigInteger
 import java.security.MessageDigest
-
-val Users: List<User> = listOf(
-    User(1, "admin", "35d0239415e2371ee283a773f215c036", "Salt"), // 123
-    User(2, "user1", "b614d9bc7599d324e730dafbee318881", "Salt1")   // qwerty123
-)
 
 fun main(args: Array<String>) {
     val list: Array<String> = if (args.isEmpty()) {
@@ -19,7 +13,8 @@ fun main(args: Array<String>) {
     val inputPass = list[1]
     println(inputLogin)
     println(inputPass)
-    val inputUser = Users.find { it.login == inputLogin }
+    val userDB = DateBase()
+    val inputUser = userDB.findUserByLogin(inputLogin)
     if (inputUser == null) {
         print("Пользователь не найден!")
         return

@@ -1,7 +1,6 @@
 package project_auth
 
 import project_auth.models.RoleResource
-import project_auth.models.Roles
 import project_auth.models.User
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -34,12 +33,7 @@ fun main(args: Array<String>) {
         collectionParameter.getValue("pass")
     )
 
-  /*  val dataRoleResource = RoleResource(
-
-    )*/
-
     authentication(dataUser)
-   // authorization(dataUser,)
 }
 
 fun authentication(dataUser: User) {
@@ -47,7 +41,6 @@ fun authentication(dataUser: User) {
     println(dataUser.pass)
     val userDB = DateBase()
     val inputUser = userDB.findUserByLogin(dataUser.login)
-
     if (inputUser == null) {
         exitCode(3)
         return
@@ -59,19 +52,6 @@ fun authentication(dataUser: User) {
         exitCode(4)
     }
 }
-
-/*fun authorization(dataUser: User, ) {
-    val inputRoleStr = "";
-    val inputRole = roleStringToEnum(inputRoleStr)
-
-    if (inputRole !== null) {
-        if (userDB.checkResourceAccess(inputRes, inputRole, inputLogin)) {
-            println("Есть Доступ!")
-        } else {
-            println("Нету доступа!")
-        }
-    }
-}*/
 
 /**
  * Вернет хэшированный пароль (с добавлением соли)
@@ -121,26 +101,6 @@ fun exitCode(number: Int) {
         7 -> {
             println("некорректная активность")
             System.exit(7)
-        }
-    }
-}
-
-/**
- * Вернет роль типа Enum если соотв, иначе вернет null
- */
-fun roleStringToEnum(roleString: String): Roles? {
-    return when (roleString) {
-        "READ" -> {
-            Roles.READ
-        }
-        "WRITE" -> {
-            Roles.WRITE
-        }
-        "EXECUTE" -> {
-            Roles.EXECUTE
-        }
-        else -> {
-            null
         }
     }
 }

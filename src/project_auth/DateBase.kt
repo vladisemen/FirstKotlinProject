@@ -104,33 +104,4 @@ class DateBase {
         return users.find { it.login == login }
     }
 
-    /**
-     * Имеет ли доступ к ресурсу
-     */
-    fun checkResourceAccess(resource: String, role: Roles, loginUser: String): Boolean {
-        val idUser = findUserByLogin(loginUser)!!.id
-        for (item in rolesResources) {
-            if (item.idUser == idUser && item.role == role && isResource(resource, item.resource)) {
-                return true
-            }
-        }
-        return false
-    }
-    /**
-     * Получает исходный ресурс и полученный и проверяет доступность
-     */
-    private fun isResource(resource: String, itemResource: String): Boolean {
-        val resourceList = resource.split(".")
-        val itemResourceList = itemResource.split(".")
-        if (itemResourceList.count() > resourceList.count()) {
-            return false
-        }
-        for (i in 0 until itemResourceList.count()) {
-            if (itemResourceList[i] != resourceList[i]) {
-                return false
-            }
-        }
-        return true
-    }
-
 }

@@ -15,7 +15,7 @@ fun main(args: Array<String>) {
     val collectionParameter: MutableMap<String, String> = mutableMapOf()
 
     for (parameterAndValue in text.split("-")) {
-        if (parameterAndValue != "") {
+        if (parameterAndValue != ""){
             val parameter = parameterAndValue.toString().split(" ")
             collectionParameter.put(
                 parameter[0],
@@ -35,14 +35,13 @@ fun main(args: Array<String>) {
     val inputUser = userDB.findUserByLogin(dataUser.login)
     if (inputUser == null) {
         print("Пользователь не найден!")
-        exitCode(3)
         return
     }
 
     if (inputUser.pass == getPassHashAndSolt(dataUser.pass, inputUser.salt)) {
-        exitCode(0)
+        print("Аутнетификация успешна")
     } else {
-        exitCode(4)
+        print("Аутентификация неуспешна")
     }
 
 }
@@ -60,41 +59,4 @@ fun getPassHashAndSolt(pass: String, salt: String): String {
 fun getHash(password: String): String {
     val md = MessageDigest.getInstance("MD5")
     return BigInteger(1, md.digest(password.toByteArray())).toString(16).padStart(32, '0')
-}
-
-fun exitCode(number: Int) {
-    when(number){
-        0 -> {
-            println("успех")
-            System.exit(0)
-        }
-        1 -> {
-            println("вывод справки")
-            System.exit(1)
-        }
-        2 -> {
-            println("неверный формат логина")
-            System.exit(2)
-        }
-        3 -> {
-            println("неверный логин")
-            System.exit(3)
-        }
-        4 -> {
-            println("неверный пароль")
-            System.exit(4)
-        }
-        5 -> {
-            println("неизвестная роль")
-            System.exit(5)
-        }
-        6 -> {
-            println("нет доступа")
-            System.exit(6)
-        }
-        7 -> {
-            println("некорректная активность")
-            System.exit(7)
-        }
-    }
 }

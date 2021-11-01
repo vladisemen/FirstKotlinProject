@@ -21,7 +21,7 @@ fun main(args: Array<String>) {
 
     for (parameterAndValue in text.split("-")) {
         if (parameterAndValue != "") {
-            val parameter = parameterAndValue.toString().split(" ")
+            val parameter = parameterAndValue.split(" ")
             collectionParameter.put(
                 parameter[0],
                 parameter[1]
@@ -54,7 +54,7 @@ fun authentication(dataUser: User) {
     }
 
     if (inputUser.pass == getPassHashAndSolt(dataUser.pass, inputUser.salt)) {
-        exitCode(0)
+        //exitCode(0)
     } else {
         exitCode(4)
     }

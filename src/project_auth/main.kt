@@ -12,10 +12,6 @@ fun main(args: Array<String>) {
         args.toString()
     }
 
-    if (text.contains("") || text.contains("-h")) {
-        exitCode(1)
-    }
-
     val collectionParameter: MutableMap<String, String> = mutableMapOf()
 
     for (parameterAndValue in text.split("-")) {
@@ -42,6 +38,7 @@ fun authentication(dataUser: User) {
     val userDB = DateBase()
     val inputUser = userDB.findUserByLogin(dataUser.login)
     if (inputUser == null) {
+        print("Пользователь не найден!")
         exitCode(3)
         return
     }

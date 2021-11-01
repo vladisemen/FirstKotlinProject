@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
         args.toString()
     }
 
-    if (text.contains("") || text.contains("-h")) {
+    if (text == "" || text.contains("-h")) {
         exitCode(1)
     }
 
@@ -33,13 +33,13 @@ fun main(args: Array<String>) {
         collectionParameter.getValue("login"),
         collectionParameter.getValue("pass")
     )
-
-  /*  val dataRoleResource = RoleResource(
-
-    )*/
-
     authentication(dataUser)
-   // authorization(dataUser,)
+
+    val dataRoleResource = RoleResource(
+        roleStringToEnum(collectionParameter.getValue("role")),
+        collectionParameter.getValue("res"),
+    )
+    authorization(dataUser, dataRoleResource)
 }
 
 fun authentication(dataUser: User) {
@@ -60,18 +60,17 @@ fun authentication(dataUser: User) {
     }
 }
 
-/*fun authorization(dataUser: User, ) {
-    val inputRoleStr = "";
-    val inputRole = roleStringToEnum(inputRoleStr)
+fun authorization(dataUser: User, dataRoleResource: RoleResource) {
+    val userDB = DateBase()
 
-    if (inputRole !== null) {
-        if (userDB.checkResourceAccess(inputRes, inputRole, inputLogin)) {
-            println("Есть Доступ!")
+    if (dataRoleResource.role !== null) {
+        if (userDB.checkResourceAccess(dataRoleResource.resource, dataRoleResource.role, dataUser.login)) {
+            exitCode(0)
         } else {
-            println("Нету доступа!")
+            exitCode(6)
         }
     }
-}*/
+}
 
 /**
  * Вернет хэшированный пароль (с добавлением соли)

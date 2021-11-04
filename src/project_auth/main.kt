@@ -8,24 +8,18 @@ import java.security.MessageDigest
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
-    val text = if (args.isEmpty()) {
+    val inputText = if (args.isEmpty()) {
         readLine().toString()
     } else {
         args.toString()
     }
 
-    if (text == "" || text.contains("-h")) {
+    if (inputText == "" || inputText.contains("-h")) {
         exitCode(1)
     }
 
     val collectionParameter: MutableMap<String, String> = mutableMapOf()
-
-    for (parameterAndValue in text.split("-")) {
-        if (parameterAndValue != "") {
-            val parameter = parameterAndValue.split(" ")
-            collectionParameter[parameter[0]] = parameter[1]
-        }
-    }
+    writeParameters(collectionParameter, inputText)
 
     val dataUser = User(
         collectionParameter.getValue("login"),
@@ -33,10 +27,8 @@ fun main(args: Array<String>) {
     )
 
     if(isAuthentication(dataUser)){
-        println("Аутентификация успешна")
         exitCode(0)
     }else{
-        println("Аутентификация не успешна")
         exitCode(4)
     }
 
@@ -45,11 +37,18 @@ fun main(args: Array<String>) {
         collectionParameter.getValue("res"),
     )
     if (isAuthorization(dataUser, dataRoleResource)){
-        println("Авторизация успешна")
         exitCode(0)
     }else{
-        println("Авторизация не успешна")
         exitCode(6)
+    }
+}
+
+fun writeParameters(collectionParameter: MutableMap<String, String>, inputText: String) {
+    for (parameterAndValue in inputText.split("-")) {
+        if (parameterAndValue != "") {
+            val parameter = parameterAndValue.split(" ")
+            collectionParameter[parameter[0]] = parameter[1]
+        }
     }
 }
 

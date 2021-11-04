@@ -5,6 +5,7 @@ import project_auth.models.Roles
 import project_auth.models.User
 import java.math.BigInteger
 import java.security.MessageDigest
+import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
     val text = if (args.isEmpty()) {
@@ -22,10 +23,7 @@ fun main(args: Array<String>) {
     for (parameterAndValue in text.split("-")) {
         if (parameterAndValue != "") {
             val parameter = parameterAndValue.split(" ")
-            collectionParameter.put(
-                parameter[0],
-                parameter[1]
-            )
+            collectionParameter[parameter[0]] = parameter[1]
         }
     }
 
@@ -93,35 +91,35 @@ fun exitCode(number: Int) {
     when (number) {
         0 -> {
             println("успех")
-            System.exit(0)
+            exitProcess(0)
         }
         1 -> {
             println("вывод справки")
-            System.exit(1)
+            exitProcess(1)
         }
         2 -> {
             println("неверный формат логина")
-            System.exit(2)
+            exitProcess(2)
         }
         3 -> {
             println("неверный логин")
-            System.exit(3)
+            exitProcess(3)
         }
         4 -> {
             println("неверный пароль")
-            System.exit(4)
+            exitProcess(4)
         }
         5 -> {
             println("неизвестная роль")
-            System.exit(5)
+            exitProcess(5)
         }
         6 -> {
             println("нет доступа")
-            System.exit(6)
+            exitProcess(6)
         }
         7 -> {
             println("некорректная активность")
-            System.exit(7)
+            exitProcess(7)
         }
     }
 }

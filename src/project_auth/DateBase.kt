@@ -72,8 +72,8 @@ class DateBase {
         //endregion
     )
     private val users: List<User> = listOf(
-        User( "admin", "35d0239415e2371ee283a773f215c036",1, "Salt"), // 123
-        User( "user1", "b614d9bc7599d324e730dafbee318881",2, "Salt1")   // qwerty123
+        User("admin", "35d0239415e2371ee283a773f215c036", 1, "Salt"), // 123
+        User("user1", "b614d9bc7599d324e730dafbee318881", 2, "Salt1")   // qwerty123
     )
 
     /**
@@ -116,6 +116,7 @@ class DateBase {
         }
         return false
     }
+
     /**
      * Получает исходный ресурс и полученный и проверяет доступность
      */

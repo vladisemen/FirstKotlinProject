@@ -33,43 +33,45 @@ fun main(args: Array<String>) {
         collectionParameter.getValue("login"),
         collectionParameter.getValue("pass")
     )
-    authentication(dataUser)
+
+    if(isAuthentication(dataUser)){
+        println("Аутентификация успешна")
+        exitCode(0)
+    }else{
+        println("Аутентификация не успешна")
+        exitCode(4)
+    }
 
     val dataRoleResource = RoleResource(
         roleStringToEnum(collectionParameter.getValue("role")),
         collectionParameter.getValue("res"),
     )
-    authorization(dataUser, dataRoleResource)
+    if (isAuthorization(dataUser, dataRoleResource)){
+        println("Авторизация успешна")
+        exitCode(0)
+    }else{
+        println("Авторизация не успешна")
+        exitCode(6)
+    }
 }
 
-fun authentication(dataUser: User) {
-    println(dataUser.login)
-    println(dataUser.pass)
+fun isAuthentication(dataUser: User): Boolean {
     val userDB = DateBase()
     val inputUser = userDB.findUserByLogin(dataUser.login)
 
     if (inputUser == null) {
         exitCode(3)
-        return
+        return false
     }
-
-    if (inputUser.pass == getPassHashAndSolt(dataUser.pass, inputUser.salt)) {
-        //exitCode(0)
-    } else {
-        exitCode(4)
-    }
+    return inputUser.pass == getPassHashAndSolt(dataUser.pass, inputUser.salt)
 }
 
-fun authorization(dataUser: User, dataRoleResource: RoleResource) {
+fun isAuthorization(dataUser: User, dataRoleResource: RoleResource):Boolean {
     val userDB = DateBase()
-
     if (dataRoleResource.role !== null) {
-        if (userDB.checkResourceAccess(dataRoleResource.resource, dataRoleResource.role, dataUser.login)) {
-            exitCode(0)
-        } else {
-            exitCode(6)
-        }
+        return userDB.checkResourceAccess(dataRoleResource.resource, dataRoleResource.role, dataUser.login)
     }
+    return false
 }
 
 /**

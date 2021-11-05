@@ -14,7 +14,7 @@ fun main(args: Array<String>) {
         args.toString()
     }
     // есть ли справка или строка пуста
-    if (inputText == "" || inputText.contains("-h") ) {
+    if (inputText == "" || inputText.contains("-h")) {
         exitCode(1)
     }
     val collectionParameter: MutableMap<String, String> = mutableMapOf()
@@ -30,21 +30,21 @@ fun main(args: Array<String>) {
         collectionParameter.getValue("pass")
     )
     // валидность логина
-    if (!isLoginValid(dataUser.login)){
+    if (!isLoginValid(dataUser.login)) {
         exitCode(3)
     }
     val dateBase = DateBase()
     // есть ли логин в БД
-    if(!dateBase.hasLogin(dataUser.login)){
+    if (!dateBase.hasLogin(dataUser.login)) {
         exitCode(3)
     }
 
     // аутентификация
-    if(!isAuthentication(dataUser)){
+    if (!isAuthentication(dataUser)) {
         exitCode(4)
     }
     // проверка на наличие роли и ресурса, если их нет, то просто успешная аутентификация, тк вверху уже прошла
-    if (!collectionParameter.containsKey("role") || !collectionParameter.containsKey("res")){
+    if (!collectionParameter.containsKey("role") || !collectionParameter.containsKey("res")) {
         exitCode(0)
     }
     // авторизация
@@ -52,9 +52,9 @@ fun main(args: Array<String>) {
         roleStringToEnum(collectionParameter.getValue("role")),
         collectionParameter.getValue("res"),
     )
-    if (isAuthorization(dataUser, dataRoleResource)){
+    if (isAuthorization(dataUser, dataRoleResource)) {
         exitCode(0)
-    }else{
+    } else {
         exitCode(6)
     }
 }
@@ -95,7 +95,7 @@ fun isAuthentication(dataUser: User): Boolean {
 /**
  * Вернет истину если успешно
  */
-fun isAuthorization(dataUser: User, dataRoleResource: RoleResource):Boolean {
+fun isAuthorization(dataUser: User, dataRoleResource: RoleResource): Boolean {
     val userDB = DateBase()
     if (dataRoleResource.role !== null) {
         return userDB.checkResourceAccess(dataRoleResource.resource, dataRoleResource.role, dataUser.login)

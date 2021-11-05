@@ -13,7 +13,6 @@ fun main(args: Array<String>) {
     } else {
         args.toString()
     }
-
     if (inputText == "" || inputText.contains("-h")) {
         exitCode(1)
     }
@@ -26,6 +25,10 @@ fun main(args: Array<String>) {
         collectionParameter.getValue("pass")
     )
 
+    val dateBase = DateBase()
+    if(!dateBase.hasLogin(dataUser.login)){
+        exitCode(3)
+    }
     if(isAuthentication(dataUser)){
         exitCode(0)
     }else{

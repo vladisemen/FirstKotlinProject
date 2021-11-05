@@ -38,11 +38,14 @@ fun main(args: Array<String>) {
     if(!dateBase.hasLogin(dataUser.login)){
         exitCode(3)
     }
+
     // аутентификация
-    if(isAuthentication(dataUser)){
-        exitCode(0)
-    }else{
+    if(!isAuthentication(dataUser)){
         exitCode(4)
+    }
+    // проверка на наличие роли и ресурса, если их нет, то просто успешная аутентификация, тк вверху уже прошла
+    if (!collectionParameter.containsKey("role") || !collectionParameter.containsKey("res")){
+        exitCode(0)
     }
     // авторизация
     val dataRoleResource = RoleResource(

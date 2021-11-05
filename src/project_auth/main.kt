@@ -13,12 +13,15 @@ fun main(args: Array<String>) {
     } else {
         args.toString()
     }
-    if (inputText == "" || inputText.contains("-h")) {
+    if (inputText == "" || inputText.contains("-h") ) {
         exitCode(1)
     }
-
     val collectionParameter: MutableMap<String, String> = mutableMapOf()
     writeParameters(collectionParameter, inputText)
+    
+    if (!collectionParameter.containsKey("login") || !collectionParameter.containsKey("pass")) {
+        exitCode(1)
+    }
 
     val dataUser = User(
         collectionParameter.getValue("login"),

@@ -8,33 +8,41 @@ import java.security.MessageDigest
 import kotlin.system.exitProcess
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import kotlinx.cli.*
 
 fun main(args: Array<String>) {
-    val inputText = if (args.isEmpty()) {
-        readLine().toString()
+    val inputText: Array<String> = if (args.isEmpty()) {
+        readLine().toString().split(" ").toTypedArray()
     } else {
-        args.toString()
+        args
     }
-    // есть ли справка или строка пуста
-    if (inputText == "" || inputText.contains("-h")) {
-        exitCode(1)
-    }
-    val collectionParameter: MutableMap<String, String> = mutableMapOf()
-    writeParameters(collectionParameter, inputText)
+
+    val parser = ArgParser("example")
+
+    val login by parser.option(ArgType.String, shortName = "login", description = "Login")
+    val pass by parser.option(ArgType.String, shortName = "pass", description = "Password")
+    val res by parser.option(ArgType.String, shortName = "res", description = "Resource")
+    val inputRole by parser.option(ArgType.String, shortName = "role", description = "Role")
+    val ds by parser.option(ArgType.String, shortName = "ds", description = "Date start")
+    val de by parser.option(ArgType.String, shortName = "de", description = "Date finish")
+    val vol by parser.option(ArgType.Int, shortName = "vol", description = "Number")
+
+    parser.parse(inputText)
 
     // есть ли логин и пароль
-    if (!collectionParameter.containsKey("login") || !collectionParameter.containsKey("pass")) {
+    if (login.toString().isEmpty() || pass.toString().isEmpty()) {
         exitCode(1)
     }
 
     val dataUser = User(
-        collectionParameter.getValue("login"),
-        collectionParameter.getValue("pass")
+        login.toString(),
+        pass.toString()
     )
     // валидность логина
-    if (!isLoginValid(dataUser.login)) {
-        exitCode(3)
-    }
+//    if (!isLoginValid(dataUser.login)) {
+//        exitCode(3)
+//    }
+
     val dateBase = DateBase()
     // есть ли логин в БД
     if (!dateBase.hasLogin(dataUser.login)) {
@@ -46,22 +54,26 @@ fun main(args: Array<String>) {
         exitCode(4)
     }
     // проверка на наличие роли и ресурса, если их нет, то просто успешная аутентификация, тк вверху уже прошла
-    if (!collectionParameter.containsKey("role") || !collectionParameter.containsKey("res")) {
+    if (inputRole.toString().isEmpty() || res.toString().isEmpty()) {
         exitCode(0)
     }
-    val role = roleStringToEnum(collectionParameter.getValue("role"))
-    if (role == null){
+    val role = roleStringToEnum(inputRole.toString())
+    if (role == null) {
         exitCode(5)
     }
     // авторизация
     val dataRoleResource = RoleResource(
         role,
-        collectionParameter.getValue("res"),
+        res.toString(),
     )
-    if (isAuthorization(dataUser, dataRoleResource) ) {
-        if (collectionParameter.containsKey("ds") and collectionParameter.containsKey("de") and collectionParameter.containsKey("vol")){
-            checkDateAndValues(collectionParameter.getValue("ds"),collectionParameter.getValue("de"),collectionParameter.getValue("vol"))
-        }else{
+    if (isAuthorization(dataUser, dataRoleResource)) {
+        if (ds.toString().isEmpty() && de.toString().isEmpty() && vol.toString().isEmpty()) {
+            checkDateAndValues(
+                ds.toString(),
+                de.toString(),
+                vol.toString()
+            )
+        } else {
             exitCode(0)// если не содержит дат, объема
         }
     } else {
@@ -79,7 +91,7 @@ fun checkDateAndValues(ds: String, de: String, value: String) {
  * вернет истину, если логин валидный
  */
 fun isLoginValid(login: String): Boolean {
-    return (Regex("[^a-zA-Z0-9]").find(login) != null) and (login.length<=20)
+    return (Regex("[^a-zA-Z0-9]").find(login) != null) and (login.length <= 20)
 }
 
 /**

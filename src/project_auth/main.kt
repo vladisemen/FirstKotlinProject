@@ -13,12 +13,14 @@ fun main(args: Array<String>) {
     } else {
         args.toString()
     }
+    // есть ли справка или строка пуста
     if (inputText == "" || inputText.contains("-h") ) {
         exitCode(1)
     }
     val collectionParameter: MutableMap<String, String> = mutableMapOf()
     writeParameters(collectionParameter, inputText)
-    
+
+    // есть ли логин и пароль
     if (!collectionParameter.containsKey("login") || !collectionParameter.containsKey("pass")) {
         exitCode(1)
     }
@@ -27,17 +29,22 @@ fun main(args: Array<String>) {
         collectionParameter.getValue("login"),
         collectionParameter.getValue("pass")
     )
-
+    // валидность логина
+    if (!isLoginValid(dataUser.login)){
+        exitCode(3)
+    }
     val dateBase = DateBase()
+    // есть ли логин в БД
     if(!dateBase.hasLogin(dataUser.login)){
         exitCode(3)
     }
+    // аутентификация
     if(isAuthentication(dataUser)){
         exitCode(0)
     }else{
         exitCode(4)
     }
-
+    // авторизация
     val dataRoleResource = RoleResource(
         roleStringToEnum(collectionParameter.getValue("role")),
         collectionParameter.getValue("res"),
@@ -49,6 +56,16 @@ fun main(args: Array<String>) {
     }
 }
 
+/**
+ * вернет истину, если логин валидный
+ */
+fun isLoginValid(login: String): Boolean {
+    return login.length <= 20
+}
+
+/**
+ * Заполнение параметров словаря
+ */
 fun writeParameters(collectionParameter: MutableMap<String, String>, inputText: String) {
     for (parameterAndValue in inputText.split("-")) {
         if (parameterAndValue != "") {
@@ -58,6 +75,9 @@ fun writeParameters(collectionParameter: MutableMap<String, String>, inputText: 
     }
 }
 
+/**
+ * Вернет истину если успешно
+ */
 fun isAuthentication(dataUser: User): Boolean {
     val userDB = DateBase()
     val inputUser = userDB.findUserByLogin(dataUser.login)
@@ -69,6 +89,9 @@ fun isAuthentication(dataUser: User): Boolean {
     return inputUser.pass == getPassHashAndSolt(dataUser.pass, inputUser.salt)
 }
 
+/**
+ * Вернет истину если успешно
+ */
 fun isAuthorization(dataUser: User, dataRoleResource: RoleResource):Boolean {
     val userDB = DateBase()
     if (dataRoleResource.role !== null) {

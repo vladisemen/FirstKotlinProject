@@ -47,9 +47,13 @@ fun main(args: Array<String>) {
     if (!collectionParameter.containsKey("role") || !collectionParameter.containsKey("res")) {
         exitCode(0)
     }
+    val role = roleStringToEnum(collectionParameter.getValue("role"))
+    if (role == null){
+        exitCode(5)
+    }
     // авторизация
     val dataRoleResource = RoleResource(
-        roleStringToEnum(collectionParameter.getValue("role")),
+        role,
         collectionParameter.getValue("res"),
     )
     if (isAuthorization(dataUser, dataRoleResource)) {

@@ -56,18 +56,26 @@ fun main(args: Array<String>) {
         role,
         collectionParameter.getValue("res"),
     )
-    if (isAuthorization(dataUser, dataRoleResource)) {
-        exitCode(0)
+    if (isAuthorization(dataUser, dataRoleResource) ) {
+        if (collectionParameter.containsKey("ds") and collectionParameter.containsKey("de") and collectionParameter.containsKey("vol")){
+            checkDateAndValues(collectionParameter.getValue("ds"),collectionParameter.getValue("de"),collectionParameter.getValue("vol"))
+        }else{
+            exitCode(0)// если не содержит дат, объема
+        }
     } else {
         exitCode(6)
     }
+}
+
+fun checkDateAndValues(ds: String, de: String, value: String) {
+
 }
 
 /**
  * вернет истину, если логин валидный
  */
 fun isLoginValid(login: String): Boolean {
-    return login.length <= 20
+    return (Regex("[^a-zA-Z0-9]").find(login) != null) and (login.length<=20)
 }
 
 /**

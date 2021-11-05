@@ -9,6 +9,7 @@ import kotlin.system.exitProcess
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import kotlinx.cli.*
+import java.io.File
 
 fun main(args: Array<String>) {
     val inputText: Array<String> = if (args.isEmpty()) {
@@ -20,8 +21,8 @@ fun main(args: Array<String>) {
     // разбиение данных на параметры
     val parser = ArgParser("example")
 
-    val login by parser.option(ArgType.String, shortName = "login", description = "Login")
-    val pass by parser.option(ArgType.String, shortName = "pass", description = "Password")
+    var login by parser.option(ArgType.String, shortName = "login", description = "Login")
+    var pass by parser.option(ArgType.String, shortName = "pass", description = "Password")
     val res by parser.option(ArgType.String, shortName = "res", description = "Resource")
     val inputRole by parser.option(ArgType.String, shortName = "role", description = "Role")
     val ds by parser.option(ArgType.String, shortName = "ds", description = "Date start")
@@ -30,9 +31,19 @@ fun main(args: Array<String>) {
 
     parser.parse(inputText)
 
+    //      аккаунтинг
     // есть ли логин и пароль
     if (login == null || pass == null) {
-        exitCode(1)
+        // проверка на аутентификации ранее
+        val paramAuth = File("./src/project_auth/accounting.txt").bufferedReader().use { it.readLine() }
+            .split(" ")
+
+        if (paramAuth.count() == 2) {
+            login = paramAuth[0]
+            pass = paramAuth[1]
+        } else {
+            exitCode(1)
+        }
     }
 
     // данные аутентификации
@@ -55,6 +66,9 @@ fun main(args: Array<String>) {
     if (!isAuthentication(dataUser)) {
         exitCode(4)
     }
+    // запись данных аутентифицированного пользователя
+    File("./src/project_auth/accounting.txt")
+        .bufferedWriter().use { out -> out.write(login + " " + pass) }
 
     // проверка на наличие роли и ресурса, если их нет, то просто успешная аутентификация, тк вверху уже прошла
     if (inputRole != null && res != null) {

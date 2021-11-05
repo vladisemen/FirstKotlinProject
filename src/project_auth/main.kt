@@ -17,6 +17,7 @@ fun main(args: Array<String>) {
         args
     }
 
+    // разбиение данных на параметры
     val parser = ArgParser("example")
 
     val login by parser.option(ArgType.String, shortName = "login", description = "Login")
@@ -30,18 +31,19 @@ fun main(args: Array<String>) {
     parser.parse(inputText)
 
     // есть ли логин и пароль
-    if (login.toString().isEmpty() || pass.toString().isEmpty()) {
+    if (login == null || pass == null) {
         exitCode(1)
     }
 
+    // данные аутентификации
     val dataUser = User(
         login.toString(),
         pass.toString()
     )
     // валидность логина
-//    if (!isLoginValid(dataUser.login)) {
-//        exitCode(3)
-//    }
+    if (!isLoginValid(dataUser.login)) {
+        exitCode(3)
+    }
 
     val dateBase = DateBase()
     // есть ли логин в БД
@@ -53,45 +55,45 @@ fun main(args: Array<String>) {
     if (!isAuthentication(dataUser)) {
         exitCode(4)
     }
+
     // проверка на наличие роли и ресурса, если их нет, то просто успешная аутентификация, тк вверху уже прошла
-    if (inputRole.toString().isEmpty() || res.toString().isEmpty()) {
-        exitCode(0)
-    }
-    val role = roleStringToEnum(inputRole.toString())
-    if (role == null) {
-        exitCode(5)
-    }
-    // авторизация
-    val dataRoleResource = RoleResource(
-        role,
-        res.toString(),
-    )
-    if (isAuthorization(dataUser, dataRoleResource)) {
-        if (ds.toString().isEmpty() && de.toString().isEmpty() && vol.toString().isEmpty()) {
-            checkDateAndValues(
-                ds.toString(),
-                de.toString(),
-                vol.toString()
-            )
-        } else {
-            exitCode(0)// если не содержит дат, объема
+    if (inputRole != null && res != null) {
+        val role = roleStringToEnum(inputRole.toString())
+
+        if (role == null) {
+            exitCode(5)
         }
-    } else {
-        exitCode(6)
+
+        // Данные авторизация
+        val dataRoleResource = RoleResource(
+            role,
+            res.toString(),
+        )
+
+        // Авторизация
+        if (isAuthorization(dataUser, dataRoleResource)) {
+            if (ds != null && de != null && vol != null) {
+                checkDateAndValues(ds.toString(), de.toString(), vol.toString())
+            } else {
+                exitCode(0)// если не содержит дат, объема
+            }
+        } else {
+            exitCode(6)
+        }
     }
+    exitCode(0)
 }
 
 fun checkDateAndValues(ds: String, de: String, value: String) {
     val dateStart = LocalDate.parse(ds, DateTimeFormatter.ISO_DATE)
     val dateEnd = LocalDate.parse(de, DateTimeFormatter.ISO_DATE)
-
 }
 
 /**
  * вернет истину, если логин валидный
  */
 fun isLoginValid(login: String): Boolean {
-    return (Regex("[^a-zA-Z0-9]").find(login) != null) and (login.length <= 20)
+    return (Regex("^[a-zA-Z0-9]").find(login) != null) && (login.length <= 20)
 }
 
 /**

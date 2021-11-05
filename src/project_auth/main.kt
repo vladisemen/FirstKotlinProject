@@ -6,6 +6,8 @@ import project_auth.models.User
 import java.math.BigInteger
 import java.security.MessageDigest
 import kotlin.system.exitProcess
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 fun main(args: Array<String>) {
     val inputText = if (args.isEmpty()) {
@@ -68,6 +70,8 @@ fun main(args: Array<String>) {
 }
 
 fun checkDateAndValues(ds: String, de: String, value: String) {
+    val dateStart = LocalDate.parse(ds, DateTimeFormatter.ISO_DATE)
+    val dateEnd = LocalDate.parse(de, DateTimeFormatter.ISO_DATE)
 
 }
 

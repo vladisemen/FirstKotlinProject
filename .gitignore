@@ -4,4 +4,5 @@ out/*
 FirstKotlonProject.iml
 src/.idea/*
 # Package Files #
-*.jar
+jar/*.jar
+app.jar

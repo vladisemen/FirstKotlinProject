@@ -1,4 +1,4 @@
-package project_auth.models
+package project_auth.Models
 
 data class RoleResource(
     val role: Roles?,

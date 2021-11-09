@@ -1,4 +1,4 @@
-package project_auth.Models
+package project_auth.models
 
 data class User(
     val login: String,

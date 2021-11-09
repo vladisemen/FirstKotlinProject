@@ -2,9 +2,9 @@ package project_auth
 
 import kotlinx.cli.ArgParser
 import kotlinx.cli.ArgType
-import project_auth.Models.RoleResource
-import project_auth.Models.Roles
-import project_auth.Models.User
+import project_auth.models.RoleResource
+import project_auth.models.Roles
+import project_auth.models.User
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.time.LocalDate

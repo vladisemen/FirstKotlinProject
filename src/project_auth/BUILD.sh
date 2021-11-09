@@ -1,1 +1,1 @@
-kotlinc main.kt DateBase.kt models/Roles.kt models/RoleResource.kt models/User.kt -cp lib/kotlinx-cli-0.2.1.jar -include-runtime -d main.jar
+kotlinc ./src/project_auth/main.kt ./src/project_auth/DateBase.kt ./src/project_auth/models/Roles.kt ./src/project_auth/models/RoleResource.kt ./src/project_auth/models/User.kt -cp ./src/project_auth/lib/kotlinx-cli-0.2.1.jar -include-runtime -d ./src/project_auth/main.jar

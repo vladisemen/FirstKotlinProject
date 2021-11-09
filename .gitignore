@@ -3,6 +3,7 @@
 out/*
 FirstKotlonProject.iml
 src/.idea/*
+kotlin.iml
 # Package Files #
 jar/*.jar
 app.jar

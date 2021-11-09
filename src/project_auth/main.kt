@@ -5,7 +5,6 @@ import kotlinx.cli.ArgType
 import project_auth.models.RoleResource
 import project_auth.models.Roles
 import project_auth.models.User
-import java.io.File
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.time.LocalDate
@@ -22,8 +21,8 @@ fun main(args: Array<String>) {
     // разбиение данных на параметры
     val parser = ArgParser("example")
 
-    var login by parser.option(ArgType.String, shortName = "login", description = "Login")
-    var pass by parser.option(ArgType.String, shortName = "pass", description = "Password")
+    val login by parser.option(ArgType.String, shortName = "login", description = "Login")
+    val pass by parser.option(ArgType.String, shortName = "pass", description = "Password")
     val res by parser.option(ArgType.String, shortName = "res", description = "Resource")
     val inputRole by parser.option(ArgType.String, shortName = "role", description = "Role")
     val ds by parser.option(ArgType.String, shortName = "ds", description = "Date start")
@@ -68,8 +67,8 @@ fun main(args: Array<String>) {
         exitCode(4)
     }
     // запись данных аутентифицированного пользователя
-    File("./src/project_auth/accounting.txt")
-        .bufferedWriter().use { out -> out.write(login + " " + pass) }
+    //File("./src/project_auth/accounting.txt")
+      //  .bufferedWriter().use { out -> out.write(login + " " + pass) }
 
     // проверка на наличие роли и ресурса, если их нет, то просто успешная аутентификация, тк вверху уже прошла
     if (inputRole != null && res != null) {

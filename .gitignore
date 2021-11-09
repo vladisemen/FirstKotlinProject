@@ -1,9 +1,0 @@
-.git/*
-.idea/*
-out/*
-FirstKotlonProject.iml
-src/.idea/*
-# Package Files #
-jar/*.jar
-app.jar
-src/project_auth/main.jar

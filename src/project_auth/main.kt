@@ -1,15 +1,16 @@
 package project_auth
 
+import kotlinx.cli.ArgParser
+import kotlinx.cli.ArgType
 import project_auth.models.RoleResource
 import project_auth.models.Roles
 import project_auth.models.User
+import java.io.File
 import java.math.BigInteger
 import java.security.MessageDigest
-import kotlin.system.exitProcess
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import kotlinx.cli.*
-import java.io.File
+import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
     val inputText: Array<String> = if (args.isEmpty()) {
@@ -31,7 +32,7 @@ fun main(args: Array<String>) {
 
     parser.parse(inputText)
 
-    //      аккаунтинг
+/*    //      аккаунтинг
     // есть ли логин и пароль
     if (login == null || pass == null) {
         // проверка на аутентификации ранее
@@ -44,7 +45,7 @@ fun main(args: Array<String>) {
         } else {
             exitCode(1)
         }
-    }
+    }*/
 
     // данные аутентификации
     val dataUser = User(
@@ -110,17 +111,6 @@ fun isLoginValid(login: String): Boolean {
     return (Regex("^[a-zA-Z0-9]").find(login) != null) && (login.length <= 20)
 }
 
-/**
- * Заполнение параметров словаря
- */
-fun writeParameters(collectionParameter: MutableMap<String, String>, inputText: String) {
-    for (parameterAndValue in inputText.split("-")) {
-        if (parameterAndValue != "") {
-            val parameter = parameterAndValue.split(" ")
-            collectionParameter[parameter[0]] = parameter[1]
-        }
-    }
-}
 
 /**
  * Вернет истину если успешно

@@ -1,4 +1,4 @@
-package project_auth.Models
+package project_auth.models
 
 enum class Roles() {
     READ,

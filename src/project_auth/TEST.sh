@@ -39,7 +39,7 @@ CaseTest[33]="-login jdoe -pass sup3rpaZZ -role READ -res a.b -ds 2015-01-01 -de
 CaseTest[34]="-login X -pass X -role READ -res X -ds 2015-01-01 -de 2015-12-31 -vol XXX"
 CaseTest[35]="-login X -pass X -role READ -res X"
 
-expectedExitCodes=(1 0 0 0 3 3 4 0 5 3 0 0 5 0 0 1 1 1 0 1 1 2 3 4 0 0 0 5 6 6 6 0 7 7 3 3)
+expectedExitCodes=(1 0 0 0 2 3 4 0 5 3 0 0 5 0 0 7 7 7 0 1 0 2 3 4 0 0 0 5 6 6 6 0 7 7 3 3)
 
 for ((i = 0; i < "$QuantityTest"; i++)); do
   test=${CaseTest[$i]}

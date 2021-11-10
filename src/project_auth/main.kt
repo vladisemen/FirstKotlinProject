@@ -111,7 +111,6 @@ fun isDateAndValueValid(ds: String, de: String, value: String) {
     }
 }
 
-
 fun checkDateAndValues(ds: String, de: String, value: String) {
     isDateAndValueValid(ds, de, value)
 
@@ -123,9 +122,8 @@ fun checkDateAndValues(ds: String, de: String, value: String) {
  * вернет истину, если логин валидный
  */
 fun isLoginValid(login: String): Boolean {
-    return (Regex("^[a-zA-Z0-9]").find(login) != null) && (login.length <= 20)
+    return Regex("^[A-Za-z0-9]{1,20}$").find(login) != null
 }
-
 
 /**
  * Вернет истину если успешно

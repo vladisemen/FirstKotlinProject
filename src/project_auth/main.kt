@@ -7,8 +7,10 @@ import project_auth.Models.Roles
 import project_auth.Models.User
 import java.math.BigInteger
 import java.security.MessageDigest
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.*
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
@@ -27,7 +29,7 @@ fun main(args: Array<String>) {
     val inputRole by parser.option(ArgType.String, shortName = "role", description = "Role")
     val ds by parser.option(ArgType.String, shortName = "ds", description = "Date start")
     val de by parser.option(ArgType.String, shortName = "de", description = "Date finish")
-    val vol by parser.option(ArgType.Int, shortName = "vol", description = "Number")
+    val vol by parser.option(ArgType.String, shortName = "vol", description = "Number")
 
     parser.parse(inputText)
 
@@ -53,7 +55,7 @@ fun main(args: Array<String>) {
     )
     // валидность логина
     if (!isLoginValid(dataUser.login)) {
-        exitCode(3)
+        exitCode(2)
     }
 
     val dateBase = DateBase()
@@ -68,7 +70,7 @@ fun main(args: Array<String>) {
     }
     // запись данных аутентифицированного пользователя
     //File("./src/project_auth/accounting.txt")
-      //  .bufferedWriter().use { out -> out.write(login + " " + pass) }
+    //  .bufferedWriter().use { out -> out.write(login + " " + pass) }
 
     // проверка на наличие роли и ресурса, если их нет, то просто успешная аутентификация, тк вверху уже прошла
     if (inputRole != null && res != null) {
@@ -81,7 +83,7 @@ fun main(args: Array<String>) {
         // Данные авторизация
         val dataRoleResource = RoleResource(
             role,
-            res.toString(),
+            res.toString().uppercase(),
         )
 
         // Авторизация
@@ -98,7 +100,21 @@ fun main(args: Array<String>) {
     exitCode(0)
 }
 
+fun isDateAndValueValid(ds: String, de: String, value: String) {
+    val datePattern = "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])"
+
+    if (Regex(datePattern).find(ds) == null
+        || Regex(datePattern).find(de) == null
+        || Regex("\\d+").find(value) == null
+    ) {
+        exitCode(7)
+    }
+}
+
+
 fun checkDateAndValues(ds: String, de: String, value: String) {
+    isDateAndValueValid(ds, de, value)
+
     val dateStart = LocalDate.parse(ds, DateTimeFormatter.ISO_DATE)
     val dateEnd = LocalDate.parse(de, DateTimeFormatter.ISO_DATE)
 }

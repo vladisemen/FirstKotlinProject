@@ -1,4 +1,4 @@
-QuantityTest=19
+QuantityTest=36
 QuantitPassedTests=0
 declare -A CaseTest
 CaseTest[0]=""
@@ -21,7 +21,25 @@ CaseTest[16]="-login admin -pass 123 -role READ -res A.B -ds 2020-01-1 -de 2020-
 CaseTest[17]="-login admin -pass 123 -role READ -res A.B -ds 2020-01-11 -de 2020-10-12 -vol hgh"
 CaseTest[18]="-login admin -pass 123 -role WRITE -res A -ds 2020-01-12 -de 2020-01-13 -vol 10"
 
-expectedExitCodes=(1 0 0 0 3 3 4 0 5 3 0 0 5 0 0 1 1 1 0)
+CaseTest[19]=""
+CaseTest[20]="-h"
+CaseTest[21]="-login 'X-X' -pass 'XXX'"
+CaseTest[22]="-login 'XXX' -pass 'XXX'"
+CaseTest[23]="-login 'jdoe' -pass 'XXX'"
+CaseTest[24]="-login 'jdoe' -pass 'sup3rpaZZ'"
+CaseTest[25]="-login 'jdoe' -pass 'sup3rpaZZ' -role 'READ' -res 'a'"
+CaseTest[26]="-login 'jdoe' -pass 'sup3rpaZZ' -role 'READ' -res 'a.b'"
+CaseTest[27]="-login 'jdoe' -pass 'sup3rpaZZ' -role 'XXX' -res 'a.b'"
+CaseTest[28]="-login 'jdoe' -pass 'sup3rpaZZ' -role 'READ' -res 'XXX'"
+CaseTest[29]="-login 'jdoe' -pass 'sup3rpaZZ' -role 'WRITE' -res 'a' "
+CaseTest[30]="-login 'jdoe' -pass 'sup3rpaZZ' -role 'WRITE' -res 'a.bc'"
+CaseTest[31]="-login 'jdoe' -pass 'sup3rpaZZ' -role 'READ' -res 'a.b' -ds '2015-01-01' -de '2015-12-31' -vol '100'"
+CaseTest[32]="-login 'jdoe' -pass 'sup3rpaZZ' -role 'READ' -res 'a.b' -ds '01-01-2015' -de '2015-12-31' -vol '100'"
+CaseTest[33]="-login 'jdoe' -pass 'sup3rpaZZ' -role 'READ' -res 'a.b' -ds '2015-01-01' -de '2015-12-31' -vol 'XXX'"
+CaseTest[34]="-login 'X' -pass 'X' -role 'READ' -res 'X' -ds '2015-01-01' -de '2015-12-31' -voi 'XXX'"
+CaseTest[35]="-login 'X' -pass 'X' -role 'READ' -res 'X'"
+
+expectedExitCodes=(1 0 0 0 3 3 4 0 5 3 0 0 5 0 0 1 1 1 0 1 1 2 3 4 0 0 0 5 6 6 6 0 7 7 2 2)
 
 for ((i = 0; i < "$QuantityTest"; i++)); do
   test=${CaseTest[$i]}

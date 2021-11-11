@@ -105,20 +105,6 @@ class DateBase {
     }
 
     /**
-     * найдет и вернет пароль в "БД"
-     */
-    fun findPasswordByLogin(login: String): String {
-        return findUserByLogin(login)!!.pass
-    }
-
-    /**
-     * найдет и вернет соль по логину
-     */
-    fun findSaltByLogin(login: String): String {
-        return findUserByLogin(login)!!.salt
-    }
-
-    /**
      * Найдет и вернет юзера по логину
      */
     fun findUserByLogin(login: String): User? {
@@ -154,5 +140,4 @@ class DateBase {
         }
         return true
     }
-
 }

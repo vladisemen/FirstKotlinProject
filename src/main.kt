@@ -24,6 +24,31 @@ fun main(args: Array<String>) {
 
     parser.parse(args)
 
+    val numberCode = isAAAFun(
+        login.toString(),
+        pass.toString(),
+        res.toString(),
+        inputRole.toString(),
+        ds.toString(),
+        de.toString(),
+        vol.toString()
+    )
+
+    exitCode(numberCode)
+}
+
+/**
+ * основная функция возврата нужного кода
+ */
+fun isAAAFun(
+    login: String,
+    pass: String,
+    res: String,
+    inputRole: String,
+    ds: String,
+    de: String,
+    vol: String,
+): Int {
 /*    //      аккаунтинг
     // есть ли логин и пароль
     if (login == null || pass == null) {
@@ -41,70 +66,69 @@ fun main(args: Array<String>) {
 
     // данные аутентификации
     val dataUser = User(
-        login.toString(),
-        pass.toString()
+        login,
+        pass
     )
     // валидность логина
     if (!isLoginValid(dataUser.login)) {
-        exitCode(2)
+        return 2
     }
 
     val dateBase = DateBase()
     // есть ли логин в БД
     if (!dateBase.hasLogin(dataUser.login)) {
-        exitCode(3)
+        return 3
     }
 
     // аутентификация
     if (!isAuthentication(dataUser)) {
-        exitCode(4)
+        return 4
     }
     // запись данных аутентифицированного пользователя
     //File("./src/project_auth/accounting.txt")
     //  .bufferedWriter().use { out -> out.write(login + " " + pass) }
 
     // проверка на наличие роли и ресурса, если их нет, то просто успешная аутентификация, тк вверху уже прошла
-    if (inputRole != null && res != null) {
-        val role = roleStringToEnum(inputRole.toString())
-
-        if (role == null) {
-            exitCode(5)
-        }
+    if (inputRole != "null" && res != "null") {
+        val role = roleStringToEnum(inputRole) ?: return 5
 
         // Данные авторизация
         val dataRoleResource = RoleResource(
             role,
-            res.toString().uppercase(),
+            res.uppercase(),
         )
 
         // Авторизация
         if (isAuthorization(dataUser, dataRoleResource)) {
-            if (ds != null && de != null && vol != null) {
-                checkDateAndValues(ds.toString(), de.toString(), vol.toString())
+            if (ds != "null" && de != "null" && vol != "null") {
+                if (isDateAndValueValid(ds, de, vol)) {
+                    return 7
+                }
+
+                checkDateAndValues(ds, de, vol)
             } else {
-                exitCode(0)// если не содержит дат, объема
+                return 0// если не содержит дат, объема
             }
         } else {
-            exitCode(6)
+            return 6
         }
     }
-    exitCode(0)
+    return 0
 }
 
-fun isDateAndValueValid(ds: String, de: String, value: String) {
+fun isDateAndValueValid(ds: String, de: String, value: String): Boolean {
     val datePattern = "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])"
 
     if (Regex(datePattern).find(ds) == null
         || Regex(datePattern).find(de) == null
         || Regex("\\d+").find(value) == null
     ) {
-        exitCode(7)
+        return true
     }
+    return false
 }
 
 fun checkDateAndValues(ds: String, de: String, value: String) {
-    isDateAndValueValid(ds, de, value)
-
     val dateStart = LocalDate.parse(ds, DateTimeFormatter.ISO_DATE)
     val dateEnd = LocalDate.parse(de, DateTimeFormatter.ISO_DATE)
 }
@@ -121,13 +145,9 @@ fun isLoginValid(login: String): Boolean {
  */
 fun isAuthentication(dataUser: User): Boolean {
     val userDB = DateBase()
-    val inputUser = userDB.findUserByLogin(dataUser.login)
+    val inputUser = userDB.findUserByLogin(dataUser.login) ?: return false
 
-    if (inputUser == null) {
-        exitCode(3)
-        return false
-    }
-    return inputUser.pass == getPassHashAndSolt(dataUser.pass, inputUser.salt)
+    return inputUser.pass == getPassHashAndSalt(dataUser.pass, inputUser.salt)
 }
 
 /**
@@ -144,7 +164,7 @@ fun isAuthorization(dataUser: User, dataRoleResource: RoleResource): Boolean {
 /**
  * Вернет хэшированный пароль (с добавлением соли)
  */
-fun getPassHashAndSolt(pass: String, salt: String): String {
+fun getPassHashAndSalt(pass: String, salt: String): String {
     return getHash(getHash(pass) + salt)
 }
 

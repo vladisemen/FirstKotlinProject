@@ -1,5 +1,3 @@
-package project_auth
-
 import project_auth.Models.RoleResource
 import project_auth.Models.Roles
 import project_auth.Models.User

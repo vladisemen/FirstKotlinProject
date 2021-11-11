@@ -1,5 +1,3 @@
-package project_auth
-
 import kotlinx.cli.ArgParser
 import kotlinx.cli.ArgType
 import project_auth.Models.RoleResource

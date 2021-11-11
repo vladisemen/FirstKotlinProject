@@ -116,6 +116,7 @@ class DateBase {
      */
     fun checkResourceAccess(resource: String, role: Roles, loginUser: String): Boolean {
         val idUser = findUserByLogin(loginUser)!!.id
+
         for (item in rolesResources) {
             if (item.idUser == idUser && item.role == role && isResource(resource, item.resource)) {
                 return true
@@ -130,9 +131,11 @@ class DateBase {
     private fun isResource(resource: String, itemResource: String): Boolean {
         val resourceList = resource.split(".")
         val itemResourceList = itemResource.split(".")
+
         if (itemResourceList.count() > resourceList.count()) {
             return false
         }
+
         for (i in 0 until itemResourceList.count()) {
             if (itemResourceList[i] != resourceList[i]) {
                 return false

@@ -1,12 +1,8 @@
 .git/*
 .idea/*
 out/*
-FirstKotlonProject.iml
-src/.idea/*
+*.iml
 kotlin.iml
 # Package Files #
 jar/*.jar
 app.jar
-src/project_auth/main.jar
-src/project_auth/.idea/
-src/project_auth/project_auth.iml

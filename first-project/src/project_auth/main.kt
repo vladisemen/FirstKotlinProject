@@ -7,10 +7,8 @@ import project_auth.Models.Roles
 import project_auth.Models.User
 import java.math.BigInteger
 import java.security.MessageDigest
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.*
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {

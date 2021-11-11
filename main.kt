@@ -12,11 +12,6 @@ import java.time.format.DateTimeFormatter
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
-    val inputText: Array<String> = if (args.isEmpty()) {
-        readLine().toString().split(" ").toTypedArray()
-    } else {
-        args
-    }
 
     // разбиение данных на параметры
     val parser = ArgParser("example")
@@ -29,7 +24,7 @@ fun main(args: Array<String>) {
     val de by parser.option(ArgType.String, shortName = "de", description = "Date finish")
     val vol by parser.option(ArgType.String, shortName = "vol", description = "Number")
 
-    parser.parse(inputText)
+    parser.parse(args)
 
 /*    //      аккаунтинг
     // есть ли логин и пароль

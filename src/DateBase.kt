@@ -1,6 +1,6 @@
-import project_auth.Models.RoleResource
-import project_auth.Models.Roles
-import project_auth.Models.User
+import models.RoleResource
+import models.Roles
+import models.User
 
 class DateBase {
     private val rolesResources: List<RoleResource> = listOf(

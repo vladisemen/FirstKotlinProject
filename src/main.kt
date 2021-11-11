@@ -1,8 +1,8 @@
 import kotlinx.cli.ArgParser
 import kotlinx.cli.ArgType
-import project_auth.Models.RoleResource
-import project_auth.Models.Roles
-import project_auth.Models.User
+import models.RoleResource
+import models.Roles
+import models.User
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.time.LocalDate

@@ -1,7 +1,5 @@
 package models
 
-import models.Roles
-
 data class RoleResource(
     val role: Roles?,
     val resource: String,

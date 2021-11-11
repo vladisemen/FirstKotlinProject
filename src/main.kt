@@ -3,6 +3,7 @@ import kotlinx.cli.ArgType
 import models.RoleResource
 import models.Roles
 import models.User
+import models.ExitCodeEnum
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.time.LocalDate
@@ -10,7 +11,6 @@ import java.time.format.DateTimeFormatter
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
-
     // разбиение данных на параметры
     val parser = ArgParser("example")
 
@@ -178,39 +178,17 @@ fun getHash(password: String): String {
 
 fun exitCode(number: Int) {
     when (number) {
-        0 -> {
-            println("успех")
-            exitProcess(0)
-        }
-        1 -> {
-            println("вывод справки")
-            exitProcess(1)
-        }
-        2 -> {
-            println("неверный формат логина")
-            exitProcess(2)
-        }
-        3 -> {
-            println("неверный логин")
-            exitProcess(3)
-        }
-        4 -> {
-            println("неверный пароль")
-            exitProcess(4)
-        }
-        5 -> {
-            println("неизвестная роль")
-            exitProcess(5)
-        }
-        6 -> {
-            println("нет доступа")
-            exitProcess(6)
-        }
-        7 -> {
-            println("некорректная активность")
-            exitProcess(7)
-        }
+        0 -> println(ExitCodeEnum.ZERO.text)
+        1 -> println(ExitCodeEnum.FIRST.text)
+        2 -> println(ExitCodeEnum.SECOND.text)
+        3 -> println(ExitCodeEnum.THREE.text)
+        4 -> println(ExitCodeEnum.FOUR.text)
+        5 -> println(ExitCodeEnum.FIVE.text)
+        6 -> println(ExitCodeEnum.SIX.text)
+        7 -> println(ExitCodeEnum.SEVEN.text)
     }
+
+    exitProcess(number)
 }
 
 /**

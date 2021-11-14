@@ -90,7 +90,7 @@ fun isAAAFun(
 
     // проверка на наличие роли и ресурса, если их нет, то просто успешная аутентификация, тк вверху уже прошла
     if (inputRole != "null" && res != "null") {
-        val role = roleStringToEnum(inputRole) ?: return 5
+        val role = Roles.valueOf(inputRole) ?: return 5 // затестить проверку на корректность роли
 
         // Данные авторизация
         val dataRoleResource = RoleResource(
@@ -189,22 +189,3 @@ fun exitCode(number: Int) {
     exitProcess(number)
 }
 
-/**
- * Вернет роль типа Enum если соотв, иначе вернет null
- */
-fun roleStringToEnum(roleString: String): Roles? {
-    return when (roleString) {
-        "READ" -> {
-            Roles.READ
-        }
-        "WRITE" -> {
-            Roles.WRITE
-        }
-        "EXECUTE" -> {
-            Roles.EXECUTE
-        }
-        else -> {
-            null
-        }
-    }
-}

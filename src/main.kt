@@ -156,10 +156,7 @@ fun isAuthentication(dataUser: User): Boolean {
 fun isAuthorization(dataUser: User, dataRoleResource: RoleResource): Boolean {
     val userDB = DateBase()
 
-    if (dataRoleResource.role !== null) {
-        return userDB.checkResourceAccess(dataRoleResource.resource, dataRoleResource.role, dataUser.login)
-    }
-    return false
+    return userDB.checkResourceAccess(dataRoleResource.resource, dataRoleResource.role, dataUser.login)
 }
 
 /**

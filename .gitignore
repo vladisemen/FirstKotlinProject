@@ -6,3 +6,4 @@ kotlin.iml
 # Package Files #
 jar/*.jar
 app.jar
+src/project_auth/main.jar

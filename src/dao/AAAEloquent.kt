@@ -47,7 +47,7 @@ class AAAEloquent {
         if (itemResource.count() > resource.count()) {
             return false
         } else {
-            return resource.subSequence(0, itemResource.length) == itemResource
+            return resource.subSequence(0, itemResource.length - 1) == itemResource
         }
     }
 }

@@ -28,7 +28,7 @@ class AAAEloquent {
     /**
      * Имеет ли доступ к ресурсу
      */
-    fun checkResourceAccess(resource: String, role: Roles, loginUser: String): Boolean {
+    fun isCheckResourceAccess(resource: String, role: Roles, loginUser: String): Boolean {
         val idUser = findUserByLogin(loginUser)!!.id
 
         for (item in dateBase.rolesResources) {

@@ -16,7 +16,7 @@ class AAA {
     /**
      *  функция аутентификации, авторизация, аккаунтинга
      */
-    fun isAAAFun(parser: Parser): Int {
+    fun funAAA(parser: Parser): Int {
         // данные аутентификации
         val dataUser = User(
             parser.login,
@@ -24,25 +24,25 @@ class AAA {
         )
         // валидность логина
         if (!isLoginValid(dataUser.login)) {
-            return 2
+            return ExitCodeEnum.SECOND.printExitCode()
         }
 
-        val isAAAEloquent = AAAEloquent()
+        val eloquentAAA = AAAEloquent()
 
         // есть ли логин в БД
-        if (!isAAAEloquent.hasLogin(dataUser.login)) {
-            return 3
+        if (!eloquentAAA.hasLogin(dataUser.login)) {
+            return ExitCodeEnum.THREE.printExitCode()
         }
 
         // аутентификация
         if (!isAuthentication(dataUser)) {
-            return 4
+            return ExitCodeEnum.FOUR.printExitCode()
         }
 
         // проверка на наличие роли и ресурса, если их нет, то просто успешная аутентификация, тк вверху уже прошла
         if (parser.inputRole != "null" && parser.res != "null") {
             // проверка на существование роли
-            Roles.values().find { it.name == parser.inputRole } ?: return 5
+            Roles.values().find { it.name == parser.inputRole } ?: return ExitCodeEnum.FIVE.printExitCode()
 
             val role = Roles.valueOf(parser.inputRole)
 
@@ -56,18 +56,18 @@ class AAA {
             if (isAuthorization(dataUser, dataRoleResource)) {
                 if (parser.ds != "null" && parser.de != "null" && parser.vol != "null") {
                     if (this.isDateAndValueValid(parser.ds, parser.de, parser.vol)) {
-                        return 7
+                        return ExitCodeEnum.SEVEN.printExitCode()
                     }
 
                     this.checkDateAndValues(parser.ds, parser.de, parser.vol)
                 } else {
-                    return 0// если не содержит дат, объема
+                    return ExitCodeEnum.ZERO.printExitCode()// если не содержит дат, объема
                 }
             } else {
-                return 6
+                return ExitCodeEnum.SIX.printExitCode()
             }
         }
-        return 0
+        return ExitCodeEnum.ZERO.printExitCode()
     }
 
     private fun isDateAndValueValid(ds: String, de: String, value: String): Boolean {
@@ -98,9 +98,9 @@ class AAA {
      * Вернет истину если успешно
      */
     private fun isAuthentication(dataUser: User): Boolean {
-        val isAAAEloquent = AAAEloquent()
+        val eloquentAAA = AAAEloquent()
 
-        val inputUser = isAAAEloquent.findUserByLogin(dataUser.login) ?: return false
+        val inputUser = eloquentAAA.findUserByLogin(dataUser.login) ?: return false
 
         return inputUser.pass == getPassHashAndSalt(dataUser.pass, inputUser.salt)
     }
@@ -109,9 +109,9 @@ class AAA {
      * Вернет истину если успешно
      */
     private fun isAuthorization(dataUser: User, dataRoleResource: RoleResource): Boolean {
-        val isAAAEloquent = AAAEloquent()
+        val eloquentAAA = AAAEloquent()
 
-        return isAAAEloquent.checkResourceAccess(
+        return eloquentAAA.isCheckResourceAccess(
             dataRoleResource.resource,
             dataRoleResource.role,
             dataUser.login
@@ -134,17 +134,6 @@ class AAA {
     }
 
     fun exitCode(number: Int) {
-        when (number) {
-            0 -> println(ExitCodeEnum.ZERO.text)
-            1 -> println(ExitCodeEnum.FIRST.text)
-            2 -> println(ExitCodeEnum.SECOND.text)
-            3 -> println(ExitCodeEnum.THREE.text)
-            4 -> println(ExitCodeEnum.FOUR.text)
-            5 -> println(ExitCodeEnum.FIVE.text)
-            6 -> println(ExitCodeEnum.SIX.text)
-            7 -> println(ExitCodeEnum.SEVEN.text)
-        }
-
         exitProcess(number)
     }
 }

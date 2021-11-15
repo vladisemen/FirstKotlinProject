@@ -7,7 +7,7 @@ fun main(args: Array<String>) {
     val objectParams = parser.parser()
 
     val isAAAService = AAA()
-    val numberCode = isAAAService.isAAAFun(objectParams)
+    val numberCode = isAAAService.funAAA(objectParams)
 
     isAAAService.exitCode(numberCode)
 }

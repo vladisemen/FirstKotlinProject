@@ -7,3 +7,4 @@ kotlin.iml
 jar/*.jar
 app.jar
 src/project_auth/main.jar
+*.jar

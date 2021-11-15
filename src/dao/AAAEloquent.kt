@@ -43,18 +43,11 @@ class AAAEloquent {
      * Получает исходный ресурс и полученный и проверяет доступность
      */
     private fun isResource(resource: String, itemResource: String): Boolean {
-        val resourceList = resource.split(".")
-        val itemResourceList = itemResource.split(".")
 
-        if (itemResourceList.count() > resourceList.count()) {
+        if (itemResource.count() > resource.count()) {
             return false
+        } else {
+            return itemResource.subSequence(0, resource.length) == resource
         }
-
-        for (i in 0 until itemResourceList.count()) {
-            if (itemResourceList[i] != resourceList[i]) {
-                return false
-            }
-        }
-        return true
     }
 }

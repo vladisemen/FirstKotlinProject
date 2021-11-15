@@ -17,21 +17,6 @@ class AAA {
      *  функция аутентификации, авторизация, аккаунтинга
      */
     fun isAAAFun(parser: Parser): Int {
-/*    //      аккаунтинг
-    // есть ли логин и пароль
-    if (login == null || pass == null) {
-        // проверка на аутентификации ранее
-        val paramAuth = File("./src/project_auth/accounting.txt").bufferedReader().use { it.readLine() }
-            .split(" ")
-
-        if (paramAuth.count() == 2) {
-            login = paramAuth[0]
-            pass = paramAuth[1]
-        } else {
-            exitCode(1)
-        }
-    }*/
-
         // данные аутентификации
         val dataUser = User(
             parser.login,
@@ -53,9 +38,6 @@ class AAA {
         if (!isAuthentication(dataUser)) {
             return 4
         }
-        // запись данных аутентифицированного пользователя
-        //File("./src/project_auth/accounting.txt")
-        //  .bufferedWriter().use { out -> out.write(login + " " + pass) }
 
         // проверка на наличие роли и ресурса, если их нет, то просто успешная аутентификация, тк вверху уже прошла
         if (parser.inputRole != "null" && parser.res != "null") {

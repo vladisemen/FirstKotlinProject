@@ -43,11 +43,10 @@ class AAAEloquent {
      * Получает исходный ресурс и полученный и проверяет доступность
      */
     private fun isResource(resource: String, itemResource: String): Boolean {
-
-        if (itemResource.count() > resource.count()) {
-            return false
+        return if (itemResource.count() > resource.count()) {
+            false
         } else {
-            return (itemResource.split('.') == resource.split('.').subList(0,itemResource.split('.').size))
+            itemResource.split('.') == resource.split('.').subList(0, itemResource.split('.').size)
         }
     }
 }

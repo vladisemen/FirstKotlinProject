@@ -90,7 +90,10 @@ fun isAAAFun(
 
     // проверка на наличие роли и ресурса, если их нет, то просто успешная аутентификация, тк вверху уже прошла
     if (inputRole != "null" && res != "null") {
-        val role = Roles.valueOf(inputRole) ?: return 5 // затестить проверку на корректность роли
+        // проверка на существование роли
+        Roles.values().find { it.name == inputRole } ?: return 5
+
+        val role = Roles.valueOf(inputRole)
 
         // Данные авторизация
         val dataRoleResource = RoleResource(
@@ -120,12 +123,12 @@ fun isDateAndValueValid(ds: String, de: String, value: String): Boolean {
     val datePattern = "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])"
 
     if (Regex(datePattern).matches(ds)
-        || Regex(datePattern).matches(de)
-        || Regex("\\d+").matches(value)
+        && Regex(datePattern).matches(de)
+        && Regex("\\d+").matches(value)
     ) {
-        return true
+        return false
     }
-    return false
+    return true
 }
 
 fun checkDateAndValues(ds: String, de: String, value: String) {

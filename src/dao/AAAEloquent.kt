@@ -44,9 +44,9 @@ class AAAEloquent {
      */
     private fun isResource(resource: String, itemResource: String): Boolean {
         return if (itemResource.count() > resource.count()) {
-            false
+            resource.contains(itemResource, ignoreCase = true)
         } else {
-            itemResource.split('.') == resource.split('.').subList(0, itemResource.split('.').size)
+            false
         }
     }
 }

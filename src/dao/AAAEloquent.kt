@@ -22,7 +22,7 @@ class AAAEloquent {
      * Найдет и вернет юзера по логину
      */
     fun findUserByLogin(login: String): User? {
-        return dateBase.users.find { it.login == login }
+        return dateBase.getUsers().find { it.login == login }
     }
 
     /**
@@ -31,7 +31,7 @@ class AAAEloquent {
     fun isCheckResourceAccess(resource: String, role: Roles, loginUser: String): Boolean {
         val idUser = findUserByLogin(loginUser)!!.id
 
-        for (item in dateBase.rolesResources) {
+        for (item in dateBase.getRolesResources()) {
             if (item.idUser == idUser && item.role == role && isResource(resource, item.resource)) {
                 return true
             }

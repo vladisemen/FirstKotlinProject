@@ -32,21 +32,12 @@ class AAAEloquent {
         val idUser = findUserByLogin(loginUser)!!.id
 
         for (item in dateBase.getRolesResources()) {
-            if (item.idUser == idUser && item.role == role && isResource(resource, item.resource)) {
-                return true
+            if (item.idUser == idUser && item.role == role && item.resource.count() <= resource.count()) {
+                if (resource.split(".").containsAll(item.resource.split("."))) {
+                    return true
+                }
             }
         }
         return false
-    }
-
-    /**
-     * Получает исходный ресурс и полученный и проверяет доступность
-     */
-    private fun isResource(resource: String, itemResource: String): Boolean {
-        return if (itemResource.count() > resource.count()) {
-            resource.contains(itemResource, ignoreCase = true)
-        } else {
-            false
-        }
     }
 }

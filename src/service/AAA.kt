@@ -9,7 +9,6 @@ import java.math.BigInteger
 import java.security.MessageDigest
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import kotlin.system.exitProcess
 import models.Parser
 
 class AAA {
@@ -132,10 +131,6 @@ class AAA {
     private fun getHash(password: String): String {
         val md = MessageDigest.getInstance("MD5")
         return BigInteger(1, md.digest(password.toByteArray())).toString(16).padStart(32, '0')
-    }
-
-    fun exitCode(number: Int) {
-        exitProcess(number)
     }
 }
 

@@ -33,7 +33,7 @@ class AAAEloquent {
 
         for (item in dateBase.getRolesResources()) {
             if (item.idUser == idUser && item.role == role && item.resource.count() <= resource.count()) {
-                if (resource.split(".").containsAll(item.resource.split("."))) {
+                if (item.resource.split('.') == resource.split('.').subList(0,item.resource.split('.').size)) {
                     return true
                 }
             }

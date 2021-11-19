@@ -34,8 +34,8 @@ class DateBase {
         User("xxx", "50f1fa3d094cd33999010d52bcf348ee", 5, "Salt4")    // yyy
     )
 
-    fun getRolesResources(): List<RoleResource> {
-        return rolesResources
+    fun getRolesResources(role: Roles, idUser: Int, countSumbols: Int): List<RoleResource> {
+        return rolesResources.filter { it.idUser == idUser && it.role == role && it.resource.length <= countSumbols}
     }
 
     fun getUsers(): List<User> {

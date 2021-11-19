@@ -31,12 +31,10 @@ class AAAEloquent {
     fun isCheckResourceAccess(resource: String, role: Roles, loginUser: String): Boolean {
         val idUser = findUserByLogin(loginUser)!!.id
 
-        for (item in dateBase.getRolesResources()) {
-            if (item.idUser == idUser && item.role == role && item.resource.count() <= resource.count()) {
+        for (item in dateBase.getRolesResources(role, idUser, resource.count())) {
                 if (item.resource.split('.') == resource.split('.').subList(0,item.resource.split('.').size)) {
                     return true
                 }
-            }
         }
         return false
     }

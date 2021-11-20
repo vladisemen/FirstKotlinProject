@@ -61,7 +61,8 @@ class AAA {
                         return ExitCodeEnum.SEVEN.printExitCode()
                     }
 
-                    this.checkDateAndValues(parser.ds, parser.de, parser.vol)
+                    val dateStart = LocalDate.parse(parser.ds, DateTimeFormatter.ISO_DATE)
+                    val dateEnd = LocalDate.parse(parser.de, DateTimeFormatter.ISO_DATE)
                 } else {
                     return ExitCodeEnum.ZERO.printExitCode()// если не содержит дат, объема
                 }
@@ -77,8 +78,6 @@ class AAA {
             && Regex(this.datePattern).matches(de)
             && Regex("\\d+").matches(value)
         ) {
-            val dateStart = LocalDate.parse(ds, DateTimeFormatter.ISO_DATE)
-            val dateEnd = LocalDate.parse(de, DateTimeFormatter.ISO_DATE)
             return false
         }
         return true

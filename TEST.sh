@@ -1,4 +1,4 @@
-QuantityTest=37
+QuantityTest=44
 QuantitPassedTests=0
 declare -A CaseTest
 CaseTest[0]=""
@@ -40,7 +40,15 @@ CaseTest[34]="-login X -pass X -role READ -res X -ds 2015-01-01 -de 2015-12-31 -
 CaseTest[35]="-login X -pass X -role READ -res X"
 CaseTest[36]="-login jdoe -pass sup3rpaZZ -role WRITE -res C.D.A.B"
 
-expectedExitCodes=(1 0 0 0 2 3 4 0 5 3 0 0 5 0 0 7 7 7 0 1 0 2 3 4 0 0 0 5 6 6 6 0 7 7 3 3 6)
+CaseTest[37]="-login null -pass 123"
+CaseTest[38]="-login null -pass qwe"
+CaseTest[39]="-login null -pass 123 -role READ -res a"
+CaseTest[40]="-login null -pass 123 -role READ -res a.b"
+CaseTest[41]="-login null -pass 123 -role READ -res a.b -ds 2015-01-01 -de 2015-12-31 -vol 100"
+CaseTest[42]="-login null -pass 123 -role READ -res a.b -ds 01-01-2015 -de 2015-12-31 -vol 100"
+CaseTest[43]="-login null -pass 123 -role WRITE -res a.b -ds 2015-01-01 -de 2015-12-31 -vol 100"
+
+expectedExitCodes=(1 0 0 0 2 3 4 0 5 3 0 0 5 0 0 7 7 7 0 1 0 2 3 4 0 0 0 5 6 6 6 0 7 7 3 3 6 0 4 6 0 0 7 6)
 
 for ((i = 0; i < "$QuantityTest"; i++)); do
   test=${CaseTest[$i]}

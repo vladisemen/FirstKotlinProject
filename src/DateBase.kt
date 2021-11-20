@@ -24,6 +24,7 @@ object DateBase {
             RoleResource(3, "A.B", Roles.WRITE),
             RoleResource(4, "A.B.C", Roles.EXECUTE),
             RoleResource(3, "A.BC", Roles.EXECUTE),
+            RoleResource(6, "A.B", Roles.READ)
             //endregion
         )
         return listRoleRes.filter { it.idUser == idUser && it.role == role && it.resource.length <= countSumbols }
@@ -34,6 +35,7 @@ object DateBase {
         User("user1", "b614d9bc7599d324e730dafbee318881", 2, "Salt1"), // qwerty123
         User("jdoe", "20718de57850c927f5127635a0a142bc", 3, "Salt2"),  // sup3rpaZZ
         User("jrow", "713c448ae8ff09d84d4037ca5d4934d9", 4, "Salt3"),  // Qweqrty12
-        User("xxx", "50f1fa3d094cd33999010d52bcf348ee", 5, "Salt4")    // yyy
+        User("xxx", "50f1fa3d094cd33999010d52bcf348ee", 5, "Salt4"),    // yyy
+        User("null", "35d0239415e2371ee283a773f215c036", 6, "Salt")    // 123
     )
 }

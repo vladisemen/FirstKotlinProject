@@ -3,31 +3,31 @@ import models.Roles
 import models.User
 
 object DateBase {
-    private val rolesResources: List<RoleResource> = listOf(
-        //region admin
-        RoleResource(1, "A", Roles.READ),
-        RoleResource(1, "B", Roles.READ),
-        RoleResource(1, "C", Roles.READ),
-        RoleResource(1, "A", Roles.WRITE),
-        RoleResource(1, "B", Roles.WRITE),
-        RoleResource(1, "C", Roles.WRITE),
-        RoleResource(1, "A", Roles.EXECUTE),
-        RoleResource(1, "B", Roles.EXECUTE),
-        RoleResource(1, "C", Roles.EXECUTE),
-        //endregion
-        //region user
-        RoleResource(2, "A", Roles.READ),
-        RoleResource(2, "A.B", Roles.EXECUTE),
-        RoleResource(2, "XY.UV.ABCDEFGHIJ", Roles.WRITE),
-        RoleResource(3, "A", Roles.READ),
-        RoleResource(3, "A.B", Roles.WRITE),
-        RoleResource(4, "A.B.C", Roles.EXECUTE),
-        RoleResource(3, "A.BC", Roles.EXECUTE),
-        //endregion
-    )
-
-    fun getRolesResources(role: Roles, idUser: Int, countSumbols: Int): List<RoleResource> =
-        rolesResources.filter { it.idUser == idUser && it.role == role && it.resource.length <= countSumbols }
+    fun getRolesResources(role: Roles, idUser: Int, countSumbols: Int): List<RoleResource> {
+        val listRoleRes = listOf(
+            //region admin
+            RoleResource(1, "A", Roles.READ),
+            RoleResource(1, "B", Roles.READ),
+            RoleResource(1, "C", Roles.READ),
+            RoleResource(1, "A", Roles.WRITE),
+            RoleResource(1, "B", Roles.WRITE),
+            RoleResource(1, "C", Roles.WRITE),
+            RoleResource(1, "A", Roles.EXECUTE),
+            RoleResource(1, "B", Roles.EXECUTE),
+            RoleResource(1, "C", Roles.EXECUTE),
+            //endregion
+            //region user
+            RoleResource(2, "A", Roles.READ),
+            RoleResource(2, "A.B", Roles.EXECUTE),
+            RoleResource(2, "XY.UV.ABCDEFGHIJ", Roles.WRITE),
+            RoleResource(3, "A", Roles.READ),
+            RoleResource(3, "A.B", Roles.WRITE),
+            RoleResource(4, "A.B.C", Roles.EXECUTE),
+            RoleResource(3, "A.BC", Roles.EXECUTE),
+            //endregion
+        )
+        return listRoleRes.filter { it.idUser == idUser && it.role == role && it.resource.length <= countSumbols }
+    }
 
     fun getUsers(): List<User> = listOf(
         User("admin", "35d0239415e2371ee283a773f215c036", 1, "Salt"),  // 123

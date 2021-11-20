@@ -13,7 +13,7 @@ import models.Parser
 
 class AAA {
 
-    private val datePattern = "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])"
+    private val datePattern = "[\\d]{4}-(0[1-9]|1[012])-(0[1-9]|1[\\d]|2[\\d]|3[01])"
 
     /**
      *  функция аутентификации, авторизация, аккаунтинга
@@ -77,14 +77,11 @@ class AAA {
             && Regex(this.datePattern).matches(de)
             && Regex("\\d+").matches(value)
         ) {
+            val dateStart = LocalDate.parse(ds, DateTimeFormatter.ISO_DATE)
+            val dateEnd = LocalDate.parse(de, DateTimeFormatter.ISO_DATE)
             return false
         }
         return true
-    }
-
-    private fun checkDateAndValues(ds: String, de: String, value: String) {
-        val dateStart = LocalDate.parse(ds, DateTimeFormatter.ISO_DATE)
-        val dateEnd = LocalDate.parse(de, DateTimeFormatter.ISO_DATE)
     }
 
     /**

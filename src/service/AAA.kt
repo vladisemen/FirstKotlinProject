@@ -50,8 +50,8 @@ class AAA {
 
             // Данные авторизация
             val dataRoleResource = RoleResource(
-                role,
-                parser.res.uppercase(),
+                resource = parser.res.uppercase(),
+                role = role,
             )
 
             // Авторизация

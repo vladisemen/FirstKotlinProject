@@ -1,20 +1,12 @@
 package models
 
 enum class ExitCodeEnum(val code: Int) {
-    ZERO(0),
-    FIRST(1),
-    SECOND(2),
-    THREE(3),
-    FOUR(4),
-    FIVE(5),
-    SIX(6),
-    SEVEN(7)
+    SUCCESS(0),
+    HELP_OUTPUT(1),
+    INVALID_LOGIN_FORMAT(2),
+    INVALID_LOGIN(3),
+    INVALID_PASSWORD(4),
+    UNKNOWN_ROLE (5),
+    NO_ACCESS(6),
+    INCORRECT_ACTIVITY(7)
 }
-//успех
-//вывод справки
-//неверный формат логина
-//неверный пароль
-//неизвестная роль
-//нет доступа
-//вывод справки
-//некорректная активность

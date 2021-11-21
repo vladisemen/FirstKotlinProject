@@ -32,25 +32,25 @@ class AAA(_parser: Parser) {
         )
         // валидность логина
         if (!isLoginValid(dataUser.login)) {
-            return ExitCodeEnum.SECOND.printExitCode()
+            return ExitCodeEnum.INVALID_LOGIN_FORMAT.code
         }
 
         val eloquentAAA = AAAEloquent()
 
         // есть ли логин в БД
         if (!eloquentAAA.hasLogin(dataUser.login)) {
-            return ExitCodeEnum.THREE.printExitCode()
+            return ExitCodeEnum.INVALID_LOGIN.code
         }
 
         // аутентификация
         if (!isAuthentication(dataUser)) {
-            return ExitCodeEnum.FOUR.printExitCode()
+            return ExitCodeEnum.INVALID_PASSWORD.code
         }
 
         // проверка на наличие роли и ресурса, если их нет, то просто успешная аутентификация, тк вверху уже прошла
         if (parser.inputRole != "null" && parser.res != "null") {
             // проверка на существование роли
-            Roles.values().find { it.name == parser.inputRole } ?: return ExitCodeEnum.FIVE.printExitCode()
+            Roles.values().find { it.name == parser.inputRole } ?: return ExitCodeEnum.UNKNOWN_ROLE.code
 
             val role = Roles.valueOf(parser.inputRole)
 
@@ -64,19 +64,19 @@ class AAA(_parser: Parser) {
             if (isAuthorization(dataUser, dataRoleResource)) {
                 if (parser.ds != "null" && parser.de != "null" && parser.vol != "null") {
                     if (this.isDateAndValueValid(parser.ds, parser.de, parser.vol)) {
-                        return ExitCodeEnum.SEVEN.printExitCode()
+                        return ExitCodeEnum.INCORRECT_ACTIVITY.code
                     }
 
                     val dateStart = LocalDate.parse(parser.ds, DateTimeFormatter.ISO_DATE)
                     val dateEnd = LocalDate.parse(parser.de, DateTimeFormatter.ISO_DATE)
                 } else {
-                    return ExitCodeEnum.ZERO.printExitCode()// если не содержит дат, объема
+                    return ExitCodeEnum.SUCCESS.code// если не содержит дат, объема
                 }
             } else {
-                return ExitCodeEnum.SIX.printExitCode()
+                return ExitCodeEnum.NO_ACCESS.code
             }
         }
-        return ExitCodeEnum.ZERO.printExitCode()
+        return ExitCodeEnum.SUCCESS.code
     }
 
     private fun isDateAndValueValid(ds: String, de: String, value: String): Boolean {

@@ -42,7 +42,7 @@ CaseTest[36]="-login jdoe -pass sup3rpaZZ -role WRITE -res C.D.A.B"
 
 CaseTest[37]="-login null -pass 123"
 CaseTest[38]="-login null -pass qwe"
-CaseTest[39]="-login null -pass "
+CaseTest[39]="-login null -pass"
 CaseTest[40]="-login -pass qwe"
 CaseTest[41]="-login null -pass 123 -role  -res a"
 CaseTest[42]="-login null -pass 123 -role READ -res"

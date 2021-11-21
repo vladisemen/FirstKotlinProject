@@ -6,8 +6,8 @@ fun main(args: Array<String>) {
     val parser = Parser(args)
     val objectParams = parser.parser()
 
-    val isAAAService = AAA()
-    val numberCode = isAAAService.funAAA(objectParams)
+    val isAAAService = AAA(objectParams)
+    val numberCode = isAAAService.funAAA()
 
     exitProcess(numberCode)
 }

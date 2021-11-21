@@ -6,7 +6,11 @@ import models.Parser
 
 class Parser(_text: Array<String>) {
 
-    private var text: Array<String> = _text
+    private var text: Array<String>
+
+    init {
+        text = _text
+    }
 
     fun parser(): Parser {
         // разбиение данных на параметры

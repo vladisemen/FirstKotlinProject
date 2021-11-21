@@ -11,14 +11,20 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import models.Parser
 
-class AAA {
+class AAA(_parser: Parser) {
+
+    private val parser: Parser
+
+    init {
+        parser = _parser
+    }
 
     private val datePattern = "[0-9]{4}-[0-9]{2}-[0-9]{2}"
 
     /**
      *  функция аутентификации, авторизация, аккаунтинга
      */
-    fun funAAA(parser: Parser): Int {
+    fun funAAA(): Int {
         // данные аутентификации
         val dataUser = User(
             parser.login,

@@ -13,7 +13,7 @@ import models.Parser
 
 class AAA {
 
-    private val datePattern = "[\\d]{4}-(0[1-9]|1[012])-(0[1-9]|1[\\d]|2[\\d]|3[01])"
+    private val datePattern = "[0-9]{4}-[0-9]{2}-[0-9]{2}"
 
     /**
      *  функция аутентификации, авторизация, аккаунтинга

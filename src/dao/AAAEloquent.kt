@@ -30,10 +30,11 @@ class AAAEloquent {
         val idUser = findUserByLogin(loginUser)!!.id
         for (item in DateBase.getRolesResources(role, idUser, resource.count())) {
             val lengthDateRes = item.resource.length
-            if (item.resource == resource.substring(0,lengthDateRes) && if(lengthDateRes == resource.length) true else resource[lengthDateRes] == '.') {
+            if (item.resource == resource.substring(0,lengthDateRes) && (lengthDateRes == resource.length) || resource[lengthDateRes] == '.') {
                     return true
                 }
         }
         return false
     }
+
 }

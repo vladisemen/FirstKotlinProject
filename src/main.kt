@@ -1,4 +1,3 @@
-import services.AAA
 import services.Authentication
 import services.Authorization
 import services.Parser
@@ -10,6 +9,10 @@ fun main(args: Array<String>) {
 
     val authentication = Authentication(objectParams)
     val authorization = Authorization(objectParams)
+
+    val numberCode = authorization.authorization(
+        authentication.authentication()
+    )
 
     exitProcess(numberCode)
 }

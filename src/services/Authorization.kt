@@ -5,8 +5,6 @@ import models.RoleResource
 import models.Roles
 import models.User
 import models.ExitCodeEnum
-import java.math.BigInteger
-import java.security.MessageDigest
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import models.Parser
@@ -21,10 +19,12 @@ class Authorization(_parser: Parser) {
 
     private val datePattern = "[0-9]{4}-[0-9]{2}-[0-9]{2}"
 
-    /**
-     *  функция аутентификации, авторизация, аккаунтинга
-     */
-    fun authorization(): Int {
+    fun authorization(codeAuth: Int): Int {
+
+        if (codeAuth != 0){
+            return codeAuth
+        }
+
         // проверка на наличие роли и ресурса, если их нет, то просто успешная аутентификация, тк вверху уже прошла
         if (parser.inputRole != "null" && parser.res != "null") {
             // проверка на существование роли
@@ -39,7 +39,7 @@ class Authorization(_parser: Parser) {
             )
 
             // Авторизация
-            if (isAuthorization(dataUser, dataRoleResource)) {
+            if (isAuthorization(User(parser.login, parser.pass), dataRoleResource)) {
                 if (parser.ds != "null" && parser.de != "null" && parser.vol != "null") {
                     if (this.isDateAndValueValid(parser.ds, parser.de, parser.vol)) {
                         return ExitCodeEnum.INCORRECT_ACTIVITY.code

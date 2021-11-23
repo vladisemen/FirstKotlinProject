@@ -19,25 +19,20 @@ class Authentication(_parser: Parser) {
      *  функция аутентификации, авторизация, аккаунтинга
      */
     fun authentication(): Int {
-        // данные аутентификации
-        val dataUser = User(
-            parser.login,
-            parser.pass
-        )
         // валидность логина
-        if (!isLoginValid(dataUser.login)) {
+        if (!isLoginValid(parser.login)) {
             return ExitCodeEnum.INVALID_LOGIN_FORMAT.code
         }
 
         val eloquentAAA = AAAEloquent()
 
         // есть ли логин в БД
-        if (!eloquentAAA.hasLogin(dataUser.login)) {
+        if (!eloquentAAA.hasLogin(parser.login)) {
             return ExitCodeEnum.INVALID_LOGIN.code
         }
 
         // аутентификация
-        if (!isAuthentication(dataUser)) {
+        if (!isAuthentication(User(parser.login, parser.pass))) {
             return ExitCodeEnum.INVALID_PASSWORD.code
         }
 

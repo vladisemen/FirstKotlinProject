@@ -4,37 +4,45 @@ import DateBase
 import models.Roles
 import models.User
 
-/**
- * DAO для класса AAA
- */
-class AAAEloquent {
+class AAAEloquent(_login: String, _resource: String = "", _role: Roles = Roles.READ) {
+
+    private val login: String
+    private val resource: String
+    private val role: Roles
+
+    init {
+        login = _login
+        resource = _resource
+        role = _role
+    }
 
     /**
      * Есть ли такой логин в БД?
      */
-    fun hasLogin(login: String): Boolean {
-        return findUserByLogin(login) != null
+    fun hasLogin(): Boolean {
+        return findUserByLogin(this.login) != null
     }
 
     /**
      * Найдет и вернет юзера по логину
      */
-    fun findUserByLogin(login: String): User? {
+    fun findUserByLogin(login: String = this.login): User? {
         return DateBase.getUsers().find { it.login == login }
     }
 
     /**
      * Имеет ли доступ к ресурсу
      */
-    fun isCheckResourceAccess(resource: String, role: Roles, loginUser: String): Boolean {
-        val idUser = findUserByLogin(loginUser)!!.id
+    fun isCheckResourceAccess(): Boolean {
+        val idUser = findUserByLogin()!!.id
         for (item in DateBase.getRolesResources(role, idUser, resource.count())) {
             val lengthDateRes = item.resource.length
-            if (item.resource == resource.substring(0,lengthDateRes) && ((lengthDateRes == resource.length) || resource[lengthDateRes] == '.')) {
-                    return true
-                }
+            if (item.resource == resource.substring(0, lengthDateRes)
+                && (lengthDateRes == resource.length || resource[lengthDateRes] == '.')
+            ) {
+                return true
+            }
         }
         return false
     }
-
 }

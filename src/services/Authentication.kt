@@ -24,10 +24,10 @@ class Authentication(_parser: Parser) {
             return ExitCodeEnum.INVALID_LOGIN_FORMAT.code
         }
 
-        val eloquentAAA = AAAEloquent()
+        val eloquentAAA = AAAEloquent(parser.login)
 
         // есть ли логин в БД
-        if (!eloquentAAA.hasLogin(parser.login)) {
+        if (!eloquentAAA.hasLogin()) {
             return ExitCodeEnum.INVALID_LOGIN.code
         }
 
@@ -50,9 +50,9 @@ class Authentication(_parser: Parser) {
      * Вернет истину если успешно
      */
     private fun isAuthentication(dataUser: User): Boolean {
-        val eloquentAAA = AAAEloquent()
+        val eloquentAAA = AAAEloquent(dataUser.login)
 
-        val inputUser = eloquentAAA.findUserByLogin(dataUser.login) ?: return false
+        val inputUser = eloquentAAA.findUserByLogin() ?: return false
 
         return inputUser.pass == getPassHashAndSalt(dataUser.pass, inputUser.salt)
     }

@@ -21,7 +21,7 @@ class Authorization(_parser: Parser) {
 
     fun authorization(codeAuth: Int): Int {
 
-        if (codeAuth != 0){
+        if (codeAuth != 0) {
             return codeAuth
         }
 
@@ -71,13 +71,9 @@ class Authorization(_parser: Parser) {
      * Вернет истину если успешно
      */
     private fun isAuthorization(dataUser: User, dataRoleResource: RoleResource): Boolean {
-        val eloquentAAA = AAAEloquent()
+        val eloquentAAA = AAAEloquent(dataUser.login, dataRoleResource.resource, dataRoleResource.role)
 
-        return eloquentAAA.isCheckResourceAccess(
-            dataRoleResource.resource,
-            dataRoleResource.role,
-            dataUser.login
-        )
+        return eloquentAAA.isCheckResourceAccess()
     }
 }
 

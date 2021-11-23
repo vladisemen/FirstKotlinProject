@@ -3,7 +3,6 @@ package services
 import dao.AAAEloquent
 import models.RoleResource
 import models.Roles
-import models.User
 import models.ExitCodeEnum
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -38,8 +37,11 @@ class Authorization(_parser: Parser) {
                 role = role,
             )
 
+            val eloquentAAA = AAAEloquent(parser.login, dataRoleResource.resource, dataRoleResource.role)
+            val idUser = eloquentAAA.findUserByLogin()!!.id
+
             // Авторизация
-            if (isAuthorization(User(parser.login, parser.pass), dataRoleResource)) {
+            if (eloquentAAA.isCheckResourceAccess(idUser)) {
                 if (parser.ds != "null" && parser.de != "null" && parser.vol != "null") {
                     if (this.isDateAndValueValid(parser.ds, parser.de, parser.vol)) {
                         return ExitCodeEnum.INCORRECT_ACTIVITY.code
@@ -65,15 +67,6 @@ class Authorization(_parser: Parser) {
             return false
         }
         return true
-    }
-
-    /**
-     * Вернет истину если успешно
-     */
-    private fun isAuthorization(dataUser: User, dataRoleResource: RoleResource): Boolean {
-        val eloquentAAA = AAAEloquent(dataUser.login, dataRoleResource.resource, dataRoleResource.role)
-
-        return eloquentAAA.isCheckResourceAccess()
     }
 }
 

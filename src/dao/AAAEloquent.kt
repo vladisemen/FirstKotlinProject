@@ -33,8 +33,7 @@ class AAAEloquent(_login: String, _resource: String = "", _role: Roles = Roles.R
     /**
      * Имеет ли доступ к ресурсу
      */
-    fun isCheckResourceAccess(): Boolean {
-        val idUser = findUserByLogin()!!.id
+    fun isCheckResourceAccess(idUser: Int): Boolean {
         for (item in DateBase.getRolesResources(role, idUser, resource.count())) {
             val lengthDateRes = item.resource.length
             if (item.resource == resource.substring(0, lengthDateRes)

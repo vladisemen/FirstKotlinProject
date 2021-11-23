@@ -20,14 +20,14 @@ class AAAEloquent(_login: String, _resource: String = "", _role: Roles = Roles.R
      * Есть ли такой логин в БД?
      */
     fun hasLogin(): Boolean {
-        return findUserByLogin(this.login) != null
+        return findUserByLogin() != null
     }
 
     /**
      * Найдет и вернет юзера по логину
      */
-    fun findUserByLogin(login: String = this.login): User? {
-        return DateBase.getUsers().find { it.login == login }
+    fun findUserByLogin(): User? {
+        return DateBase.getUsers().find { it.login == this.login }
     }
 
     /**

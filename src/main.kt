@@ -1,13 +1,15 @@
-import service.AAA
-import service.Parser
+import services.AAA
+import services.Authentication
+import services.Authorization
+import services.Parser
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
     val parser = Parser(args)
     val objectParams = parser.parser()
 
-    val isAAAService = AAA(objectParams)
-    val numberCode = isAAAService.funAAA()
+    val authentication = Authentication(objectParams)
+    val authorization = Authorization(objectParams)
 
     exitProcess(numberCode)
 }

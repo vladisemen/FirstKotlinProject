@@ -1,4 +1,4 @@
-package service
+package services
 
 import kotlinx.cli.ArgParser
 import kotlinx.cli.ArgType

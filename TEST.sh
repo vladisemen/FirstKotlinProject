@@ -52,7 +52,7 @@ CaseTest[45]="-login null -pass 123 -role READ -res a.b -ds 2015-01-01 -de 2015-
 CaseTest[46]="-login null -pass 123 -role READ -res a.b -ds 01-01-2015 -de 2015-12-31 -vol 100"
 CaseTest[47]="-login null -pass 123 -role WRITE -res a.b -ds 2015-01-01 -de 2015-12-31 -vol 100"
 
-expectedExitCodes=(1 0 0 0 2 3 4 0 5 3 0 0 5 0 0 7 7 7 0 1 0 2 3 4 0 0 0 5 6 6 6 0 7 7 3 3 6 0 4 3 3 6 6 6 0 0 7 6)
+expectedExitCodes=(1 0 0 0 2 3 4 0 5 3 0 0 5 0 0 7 7 7 0 1 0 2 3 4 0 0 0 5 6 6 6 0 7 7 3 3 6 0 4 1 1 1 1 6 0 0 7 6)
 
 for ((i = 0; i < "$QuantityTest"; i++)); do
   test=${CaseTest[$i]}

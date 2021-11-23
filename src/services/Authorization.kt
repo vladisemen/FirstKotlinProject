@@ -16,7 +16,7 @@ class Authorization(_parser: Parser) {
         parser = _parser
     }
 
-    private val datePattern = "[0-9]{4}-[0-9]{2}-[0-9]{2}"
+    private val datePattern = "\\d{4}-\\d{2}-\\d{2}"
 
     fun authorization(codeAuth: Int): Int {
 

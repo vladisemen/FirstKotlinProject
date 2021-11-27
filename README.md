@@ -4,6 +4,15 @@
 ##  Сслыки на планы заданий
 - [1 план](https://github.com/vladisemen/FirstKotlinProject/blob/master/Roadmap1.md)
 - [2 план](https://github.com/vladisemen/FirstKotlinProject/blob/master/Roadmap2.md)
+
+## Cборка проекта 
+1. В репозитории откройте терминал windows или PowerShell
+2. В командной строке напишите и вставте текст: kotlinc src/* -cp lib/kotlinx-cli-0.2.1.jar -include-runtime -d main.jar
+
+или
+
+- Запустите скрипт BUILD.sh
+
 ##  Установка программы не требуется
 ##  Есть 3 способа запуска программы:
 ### 1. Используя среду разработки [IntelliJ IDEA](https://www.jetbrains.com/ru-ru/idea/ "IntelliJ IDEA's Homepage"), запустить файл task6.kt, с расположением: "..\FirstKotlonProject\src\task6.kt" . 

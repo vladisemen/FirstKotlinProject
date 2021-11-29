@@ -5,6 +5,9 @@
 ##  Сслыка на сайт
 - [Сайт](https://vladisemen.github.io/FirstKotlinProject/)
 
+- [r2h]: https://github.com/vladisemen/FirstKotlinProject/blob/master/Roadmap1.md
+- [r2hc]: https://vladisemen.github.io/Roadmap1.md
+
 ##  Сслыки на планы заданий
 - [1 план](https://github.com/vladisemen/FirstKotlinProject/blob/master/Roadmap1.md)
 - [2 план](https://github.com/vladisemen/FirstKotlinProject/blob/master/Roadmap2.md)

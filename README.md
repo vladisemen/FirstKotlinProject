@@ -7,7 +7,7 @@
 
 
 - [a relative link](Roadmap1.md)
-- [a relative link](https://vladisemen.github.io/Roadmap1.md)
+- [a relative link](https://vladisemen.github.io/FirstKotlinProject/Roadmap1)
 
 - [r2h]: https://github.com/vladisemen/FirstKotlinProject/blob/master/Roadmap1.md#1
 - [r2hc]: https://vladisemen.github.io/Roadmap1.md

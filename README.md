@@ -5,7 +5,11 @@
 ##  Сслыка на сайт
 - [Сайт](https://vladisemen.github.io/FirstKotlinProject/)
 
-- [r2h]: https://github.com/vladisemen/FirstKotlinProject/blob/master/Roadmap1.md
+
+- [a relative link](Roadmap1.md)
+- [a relative link](https://github.com/vladisemen/FirstKotlinProject/blob/master/Roadmap1.md)
+
+- [r2h]: https://github.com/vladisemen/FirstKotlinProject/blob/master/Roadmap1.md#1
 - [r2hc]: https://vladisemen.github.io/Roadmap1.md
 
 ##  Сслыки на планы заданий

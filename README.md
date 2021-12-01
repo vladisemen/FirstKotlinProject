@@ -5,14 +5,9 @@
 ##  Сслыка на сайт
 - [Сайт](https://vladisemen.github.io/FirstKotlinProject/)
 
-- [a relative link](Roadmap1.md)
-- [a relative link](Roadmap2.md)
-- [a relative link](/)
-- [a relative link](https://vladisemen.github.io/FirstKotlinProject/Roadmap1)
-
 ##  Сслыки на планы заданий
-- [1 план](https://github.com/vladisemen/FirstKotlinProject/blob/master/Roadmap1.md)
-- [2 план](https://github.com/vladisemen/FirstKotlinProject/blob/master/Roadmap2.md)
+- [1 план](Roadmap1.md)
+- [2 план](Roadmap2.md)
 
 ## Cборка проекта 
 1. В репозитории откройте терминал windows или PowerShell

@@ -6,8 +6,8 @@
 - [Сайт](https://vladisemen.github.io/FirstKotlinProject/)
 
 ##  Сслыки на планы заданий
-- [1 план](Roadmap1.md)
-- [2 план](Roadmap2.md)
+- [x] [1 план](Roadmap1.md)
+- [] [2 план](Roadmap2.md)
 - [3 план](Roadmap3.md)
 
 ## Cборка проекта 

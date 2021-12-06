@@ -6,9 +6,9 @@
 - [Сайт](https://vladisemen.github.io/FirstKotlinProject/)
 
 ##  Сслыки на планы заданий
-- [x] [1 план](Roadmap1.md)
-- [-] [2 план](Roadmap2.md)
-- [ ] [3 план](Roadmap3.md)
+- [1 план](Roadmap1.md)
+- [2 план](Roadmap2.md)
+- [3 план](Roadmap3.md)
 
 ## Cборка проекта 
 1. В репозитории откройте терминал windows или PowerShell

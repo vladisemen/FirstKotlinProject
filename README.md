@@ -5,7 +5,7 @@
 ##  Ссылка на сайт
 - [Сайт](https://vladisemen.github.io/FirstKotlinProject/)
 
-##  Ссылка на планы заданий
+##  Ссылки на планы заданий
 - [1 план](Roadmap1.md)
 - [2 план](Roadmap2.md)
 - [3 план](Roadmap3.md)

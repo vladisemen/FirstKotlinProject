@@ -4,6 +4,8 @@ import java.sql.*
 
 fun main() {
     val conn: Connection = connection()
+
+    dml(conn);
 }
 
 fun connection(): Connection {
@@ -16,4 +18,10 @@ fun connection(): Connection {
     } catch (ex: SQLException) {
         throw ex
     }
+}
+
+fun dml(con: Connection) {
+    val st = con.createStatement()
+    st.executeUpdate("CREATE TABLE TEST(ID INT PRIMARY KEY, NAME VARCHAR(255))")
+    st.executeUpdate("DROP TABLE TEST")
 }

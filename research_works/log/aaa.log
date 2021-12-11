@@ -1,0 +1,3 @@
+Logger Name :: class research_work.log.Log :: Passed Message ::
+Logger Name :: class research_work.log.Log :: Not Passed Message ::
+Root Logger :: Passed Message As Root Is Configured For ERROR Level messages

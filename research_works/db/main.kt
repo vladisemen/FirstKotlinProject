@@ -5,12 +5,12 @@ import java.sql.*
 fun main() {
     val conn: Connection = connection()
 
-    ddl(conn);
-    dml(conn);
+    ddl(conn)
+    dml(conn)
 }
 
 fun connection(): Connection {
-    val url = "jdbc:h2:tcp://localhost/~/test"
+    val url = "jdbc:h2:~/test"
     val user = "sa"
     val passwd = ""
 

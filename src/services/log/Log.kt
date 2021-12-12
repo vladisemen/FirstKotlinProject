@@ -4,6 +4,7 @@ import models.Parser
 import org.apache.log4j.Logger
 
 class Log(_numberLog: Int) {
+
     private val numberLog: Int
     private val log: Logger = Logger.getLogger(Log::class.java)
 

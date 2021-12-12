@@ -1,6 +1,6 @@
 package services
 
-import dao.AAAEloquent
+import dao.AuthenticationEloquent
 import models.User
 import models.ExitCodeEnum
 import java.math.BigInteger
@@ -24,10 +24,10 @@ class Authentication(_parser: Parser) {
             return ExitCodeEnum.INVALID_LOGIN_FORMAT.code
         }
 
-        val eloquentAAA = AAAEloquent(parser.login)
+        val eloquentAuth = AuthenticationEloquent(parser.login)
 
         // есть ли логин в БД
-        if (!eloquentAAA.hasLogin()) {
+        if (!eloquentAuth.hasLogin()) {
             return ExitCodeEnum.INVALID_LOGIN.code
         }
 
@@ -50,9 +50,9 @@ class Authentication(_parser: Parser) {
      * Вернет истину если успешно
      */
     private fun isAuthentication(dataUser: User): Boolean {
-        val eloquentAAA = AAAEloquent(dataUser.login)
+        val eloquentAuth = AuthenticationEloquent(dataUser.login)
 
-        val inputUser = eloquentAAA.findUserByLogin() ?: return false
+        val inputUser = eloquentAuth.findUserByLogin() ?: return false
 
         return inputUser.pass == getPassHashAndSalt(dataUser.pass, inputUser.salt)
     }

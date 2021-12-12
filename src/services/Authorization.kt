@@ -1,6 +1,7 @@
 package services
 
-import dao.AAAEloquent
+import dao.AuthenticationEloquent
+import dao.AuthorizationEloquent
 import models.RoleResource
 import models.Roles
 import models.ExitCodeEnum
@@ -37,11 +38,13 @@ class Authorization(_parser: Parser) {
                 role = role,
             )
 
-            val eloquentAAA = AAAEloquent(parser.login, dataRoleResource.resource, dataRoleResource.role)
-            val idUser = eloquentAAA.findUserByLogin()!!.id
+            val eloquentAuthentication = AuthenticationEloquent(parser.login)
+            val idUser = eloquentAuthentication.findUserByLogin()!!.id
+
+            val eloquentAuthorization = AuthorizationEloquent(dataRoleResource.resource, dataRoleResource.role)
 
             // Авторизация
-            if (eloquentAAA.isCheckResourceAccess(idUser)) {
+            if (eloquentAuthorization.isCheckResourceAccess(idUser)) {
                 if (parser.ds != "null" && parser.de != "null" && parser.vol != "null") {
                     if (this.isDateAndValueValid(parser.ds, parser.de, parser.vol)) {
                         return ExitCodeEnum.INCORRECT_ACTIVITY.code

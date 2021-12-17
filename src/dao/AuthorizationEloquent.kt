@@ -20,7 +20,7 @@ class AuthorizationEloquent(_resource: String = "", _role: Roles = Roles.READ) {
      */
     fun isCheckResourceAccess(login: String): Boolean {
         val st = сonn.connection()
-        val sql = "SELECT c.login, r.role, rs.ress, rs.data_start, rs.data_end, rs.number FROM customer as c " +
+        val sql = "SELECT c.login, r.role, rs.ress FROM customer as c " +
                 "INNER JOIN role as r ON r.login_customer = c.login " +
                 "INNER JOIN resource as rs ON rs.id_role = r.id " +
                 "WHERE c.login = ? " +

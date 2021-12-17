@@ -20,7 +20,6 @@ class Authorization(_parser: Parser) {
     private val datePattern = "\\d{4}-\\d{2}-\\d{2}"
 
     fun authorization(codeAuth: Int): Int {
-
         if (codeAuth != 0) {
             return codeAuth
         }
@@ -39,12 +38,12 @@ class Authorization(_parser: Parser) {
             )
 
             val eloquentAuthentication = AuthenticationEloquent(parser.login)
-            val idUser = eloquentAuthentication.findUserByLogin()!!.id
+            val loginUser = eloquentAuthentication.findUserByLogin()!!.login
 
             val eloquentAuthorization = AuthorizationEloquent(dataRoleResource.resource, dataRoleResource.role)
 
             // Авторизация
-            if (eloquentAuthorization.isCheckResourceAccess(idUser)) {
+            if (eloquentAuthorization.isCheckResourceAccess(loginUser)) {
                 if (parser.ds != "null" && parser.de != "null" && parser.vol != "null") {
                     if (this.isDateAndValueValid(parser.ds, parser.de, parser.vol)) {
                         return ExitCodeEnum.INCORRECT_ACTIVITY.code

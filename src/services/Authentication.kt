@@ -72,4 +72,3 @@ class Authentication(_parser: Parser) {
         return BigInteger(1, md.digest(password.toByteArray())).toString(16).padStart(32, '0')
     }
 }
-

@@ -8,13 +8,13 @@
 	- [x] R2.3. Добавить библиотеку Log4j в папку lib
 	- [x] R2.4. В классе log реализовать добавление информации в файл aaa.log о причине возникновении ошибки через библиотеку
 
-- [ ] R3. Встраиваемое СУБД
-	- [ ] R3.1. Установить встраиваемое субд (H2)
-	- [ ] R3.2. Создать таблицы в БД:
-		- User с полями: login, pass
-		- Role с полями: id, role, login_user
-		- Resource с полями: id, resource, data_start (NULL), data_end (NULL), value (NULL), login_user
-	- [ ] R3.3. Адаптировать логику под новую бд (PreparedStatement)
+- [x] R3. Встраиваемое СУБД
+	- [x] R3.1. Установить встраиваемое субд (H2)
+	- [x] R3.2. Создать таблицы в БД:
+		- customer полями: login, pass, salt
+		- role с полями: id, role, login_customer
+		- resource с полями: id, resource, data_start (NULL), data_end (NULL), value (NULL), id_role
+	- [x] R3.3. Адаптировать логику под новую бд (PreparedStatement)
 
 - [ ] R4. Миграции
 	- [ ] R4.1. Добавить библиотеку flywaydb

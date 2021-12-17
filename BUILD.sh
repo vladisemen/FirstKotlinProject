@@ -1,1 +1,1 @@
-kotlinc src/* -cp lib/kotlinx-cli-0.2.1.jar -include-runtime -d main.jar
+kotlinc -cp lib/kotlinx-cli-0.2.1.jar:lib/h2-2.0.202.jar:lib/flyway-core-8.2.1.jar:lib/log4j-1.2.17.jar -include-runtime -d main.jar src

@@ -1,0 +1,3 @@
+CREATE TABLE customer(login VARCHAR(255) PRIMARY KEY, pass VARCHAR(255) not null, salt VARCHAR(255) not null);
+CREATE TABLE role(id INT PRIMARY KEY, role VARCHAR(255) not null, login_customer VARCHAR(255) not null, FOREIGN KEY (login_customer) REFERENCES customer (login));
+CREATE TABLE resource(id INT PRIMARY KEY, ress VARCHAR(255) not null,data_start VARCHAR(255),data_end VARCHAR(255), number INT, id_role INT not null, FOREIGN KEY (id_role) REFERENCES role (id));

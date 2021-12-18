@@ -1,0 +1,4 @@
+2021-12-18 18:39:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "CUSTOMER" не найдена
+Table "CUSTOMER" not found; SQL statement:
+SELECT * FROM CUSTOMER WHERE LOGIN = ? [42102-200]

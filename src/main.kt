@@ -5,6 +5,7 @@ import services.log.Log
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
+
     val parser = Parser(args)
     val objectParams = parser.parser()
 

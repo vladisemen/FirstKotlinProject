@@ -6,6 +6,7 @@ import services.log.Log
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
+
     val flyway = Flyway()
     val parser = Parser(args)
     val objectParams = parser.parser()

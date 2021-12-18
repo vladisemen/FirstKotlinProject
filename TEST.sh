@@ -57,7 +57,7 @@ expectedExitCodes=(1 0 0 0 2 3 4 0 5 3 0 0 5 0 0 7 7 7 0 1 0 2 3 4 0 0 0 5 6 6 6
 for ((i = 0; i < "$QuantityTest"; i++)); do
   test=${CaseTest[$i]}
   expectedExitCode=${expectedExitCodes[$i]}
-  java -cp "lib/kotlinx-cli-0.2.1.jar:main.jar" MainKt ""${test}""
+  java -cp "lib/kotlinx-cli-0.2.1.jar:lib/h2-1.4.200.jar:lib/flyway-core-8.2.1.jar:lib/log4j-1.2.17.jar:main.jar" MainKt ""${test}""
   exitCode="$?"
   if [ "$exitCode" == "$expectedExitCode" ]; then
     echo "CaseTest $i passed exit code $exitCode"

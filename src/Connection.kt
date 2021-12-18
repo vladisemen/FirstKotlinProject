@@ -4,7 +4,7 @@ import java.sql.SQLException
 
 class Connection {
 
-    private val url = "jdbc:h2:./src/research_work/migration/sql/test"
+    private val url = "jdbc:h2:./src/services/flyway/sql/test"
     private val user = "sa"
     private val passwd = ""
 

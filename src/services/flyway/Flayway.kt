@@ -8,7 +8,7 @@ class Flyway() {
     private val url = "jdbc:h2:./src/services/flyway/sql/test"
     private val user = "sa"
     private val password = ""
-    private val pathFileMigrations = "filesystem:src/services/flyway/migrations"
+    private val pathFileMigrations = "filesystem:./src/services/flyway/migrations"
 
     fun startFirstMigration() {
 

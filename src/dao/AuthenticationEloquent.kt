@@ -25,7 +25,7 @@ class AuthenticationEloquent(_login: String) {
      */
     fun findUserByLogin(): User? {
         val st = сonn.connection()
-        val sql = "SELECT * FROM CUSTOMER WHERE LOGIN = ?"
+        val sql = "SELECT * FROM customer WHERE LOGIN = ?"
         val preparedStatement: PreparedStatement = st.prepareStatement(sql)
 
         preparedStatement.setString(1, this.login)

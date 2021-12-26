@@ -27,17 +27,18 @@ class AuthenticationEloquent(_login: String, _conn: Connection = Connection()) {
     fun findUserByLogin(): User? {
         val st = сonn.connection()
         val sql = "SELECT * FROM customer WHERE LOGIN = ?"
-        val preparedStatement: PreparedStatement = st.prepareStatement(sql)
 
-        preparedStatement.setString(1, this.login)
-        val userData = preparedStatement.executeQuery()
+        val userData = st.prepareStatement(sql).let {
+            it.setString(1, this.login)
+            it.executeQuery()
+        }
 
         while (userData.next()) {
             if (userData.getString("login") == this.login) {
-                val dataUser = User(userData.getString("login"), userData.getString("pass"), userData.getString("salt"))
+                val result = User(userData.getString("login"), userData.getString("pass"), userData.getString("salt"))
                 st.close()
 
-                return dataUser
+                return result
             }
         }
         st.close()

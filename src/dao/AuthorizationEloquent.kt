@@ -27,11 +27,13 @@ class AuthorizationEloquent(_resource: String = "", _role: Roles = Roles.READ, _
                 "WHERE c.login = ? " +
                 "AND r.role = ?"
 
-        val preparedStatement: PreparedStatement = st.prepareStatement(sql)
-        preparedStatement.setString(1, login)
-        preparedStatement.setString(2, role.toString())
+        val userData = st.prepareStatement(sql).let{
+            it.setString(1, login)
+            it.setString(2, role.toString())
 
-        val userData = preparedStatement.executeQuery()
+            it.executeQuery()
+        }
+
 
         while (userData.next()) {
             val lengthDateRes = userData.getString("ress").length

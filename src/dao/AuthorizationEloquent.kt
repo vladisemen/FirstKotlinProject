@@ -4,13 +4,14 @@ import Connection
 import models.Roles
 import java.sql.PreparedStatement
 
-class AuthorizationEloquent(_resource: String = "", _role: Roles = Roles.READ) {
+class AuthorizationEloquent(_resource: String = "", _role: Roles = Roles.READ, _conn: Connection = Connection()) {
 
-    private val сonn = Connection()
+    private val сonn: Connection
     private val resource: String
     private val role: Roles
 
     init {
+        сonn = _conn
         resource = _resource
         role = _role
     }
@@ -39,10 +40,12 @@ class AuthorizationEloquent(_resource: String = "", _role: Roles = Roles.READ) {
                 if (userData.getString("ress") == resource.substring(0, lengthDateRes)
                     && (lengthDateRes == resource.length || resource[lengthDateRes] == '.')
                 ) {
+                    st.close()
                     return true
                 }
             }
         }
+        st.close()
         return false
     }
 }

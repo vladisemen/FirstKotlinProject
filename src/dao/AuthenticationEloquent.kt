@@ -4,12 +4,13 @@ import Connection
 import models.User
 import java.sql.PreparedStatement
 
-class AuthenticationEloquent(_login: String) {
+class AuthenticationEloquent(_login: String, _conn: Connection = Connection()) {
 
-    private val сonn = Connection()
+    private val сonn: Connection
     private val login: String
 
     init {
+        сonn = _conn
         login = _login
     }
 
@@ -33,9 +34,13 @@ class AuthenticationEloquent(_login: String) {
 
         while (userData.next()) {
             if (userData.getString("login") == this.login) {
-                return User(userData.getString("login"), userData.getString("pass"), userData.getString("salt"))
+                val dataUser = User(userData.getString("login"), userData.getString("pass"), userData.getString("salt"))
+                st.close()
+
+                return dataUser
             }
         }
+        st.close()
         return null
     }
 }

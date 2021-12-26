@@ -25,23 +25,24 @@ class AuthenticationEloquent(_login: String, _conn: Connection = Connection()) {
      * Найдет и вернет юзера по логину
      */
     fun findUserByLogin(): User? {
-        val st = сonn.connection()
-        val sql = "SELECT * FROM customer WHERE LOGIN = ?"
+        сonn.connection().let {
+            val sql = "SELECT * FROM customer WHERE LOGIN = ?"
 
-        val userData = st.prepareStatement(sql).let {
-            it.setString(1, this.login)
-            it.executeQuery()
-        }
+            val userData = it.prepareStatement(sql).let {
+                it.setString(1, this.login)
+                it.executeQuery()
+            }
 
-        while (userData.next()) {
-            if (userData.getString("login") == this.login) {
-                val result = User(userData.getString("login"), userData.getString("pass"), userData.getString("salt"))
-                st.close()
+            while (userData.next()) {
+                if (userData.getString("login") == this.login) {
+                    val result =
+                        User(userData.getString("login"), userData.getString("pass"), userData.getString("salt"))
+                    it.close()
 
-                return result
+                    return result
+                }
             }
         }
-        st.close()
         return null
     }
 }

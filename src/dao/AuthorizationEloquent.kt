@@ -20,34 +20,34 @@ class AuthorizationEloquent(_resource: String = "", _role: Roles = Roles.READ, _
      * Имеет ли доступ к ресурсу
      */
     fun isCheckResourceAccess(login: String): Boolean {
-        val st = сonn.connection()
-        val sql = "SELECT c.login, r.role, rs.ress FROM customer as c " +
-                "INNER JOIN role as r ON r.login_customer = c.login " +
-                "INNER JOIN resource as rs ON rs.id_role = r.id " +
-                "WHERE c.login = ? " +
-                "AND r.role = ?"
+        сonn.connection().let {
+            val sql = "SELECT c.login, r.role, rs.ress FROM customer as c " +
+                    "INNER JOIN role as r ON r.login_customer = c.login " +
+                    "INNER JOIN resource as rs ON rs.id_role = r.id " +
+                    "WHERE c.login = ? " +
+                    "AND r.role = ?"
 
-        val userData = st.prepareStatement(sql).let{
-            it.setString(1, login)
-            it.setString(2, role.toString())
+            val userData = it.prepareStatement(sql).let {
+                it.setString(1, login)
+                it.setString(2, role.toString())
 
-            it.executeQuery()
-        }
+                it.executeQuery()
+            }
 
 
-        while (userData.next()) {
-            val lengthDateRes = userData.getString("ress").length
+            while (userData.next()) {
+                val lengthDateRes = userData.getString("ress").length
 
-            if (resource.length >= lengthDateRes) {
-                if (userData.getString("ress") == resource.substring(0, lengthDateRes)
-                    && (lengthDateRes == resource.length || resource[lengthDateRes] == '.')
-                ) {
-                    st.close()
-                    return true
+                if (resource.length >= lengthDateRes) {
+                    if (userData.getString("ress") == resource.substring(0, lengthDateRes)
+                        && (lengthDateRes == resource.length || resource[lengthDateRes] == '.')
+                    ) {
+                        it.close()
+                        return true
+                    }
                 }
             }
         }
-        st.close()
         return false
     }
 }

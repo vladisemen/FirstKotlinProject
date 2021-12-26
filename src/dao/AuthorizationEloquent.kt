@@ -1,8 +1,7 @@
 package dao
 
-import Connection
+import services.Connection
 import models.Roles
-import java.sql.PreparedStatement
 
 class AuthorizationEloquent(_resource: String = "", _role: Roles = Roles.READ, _conn: Connection = Connection()) {
 

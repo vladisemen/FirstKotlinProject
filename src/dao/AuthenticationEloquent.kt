@@ -1,8 +1,7 @@
 package dao
 
-import Connection
+import services.Connection
 import models.User
-import java.sql.PreparedStatement
 
 class AuthenticationEloquent(_login: String, _conn: Connection = Connection()) {
 

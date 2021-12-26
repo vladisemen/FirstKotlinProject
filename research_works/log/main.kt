@@ -20,7 +20,7 @@ class Log() {
     }
 }
 
-//    val сonn = Connection()
+//    val сonn = services.Connection()
 //    val st = сonn.connection()
 
 //    val sql = "INSERT INTO resource VALUES(6 ,'A.BCD','2000-11-11','2000-11-11',10,1)"

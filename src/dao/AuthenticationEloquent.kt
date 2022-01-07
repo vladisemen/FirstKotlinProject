@@ -3,7 +3,6 @@ package dao
 import services.Connection
 import models.User
 import java.lang.Exception
-import java.sql.DriverManager
 
 class AuthenticationEloquent(login: String) {
 
@@ -38,12 +37,11 @@ class AuthenticationEloquent(login: String) {
                 try {
                     while (userResult.next()) {
                         if (userResult.getString("login") == this.login) {
-                            val result = User(
-                                userResult.getString("userResult"),
+                            return User(
+                                userResult.getString("login"),
                                 userResult.getString("pass"),
                                 userResult.getString("salt")
                             )
-                            return result
                         }
                     }
                 } catch (e: Exception) {
@@ -64,5 +62,3 @@ class AuthenticationEloquent(login: String) {
         return null
     }
 }
-
-

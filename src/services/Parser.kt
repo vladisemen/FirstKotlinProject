@@ -4,12 +4,12 @@ import kotlinx.cli.ArgParser
 import kotlinx.cli.ArgType
 import models.Parser
 
-class Parser(_text: Array<String>) {
+class Parser(text: Array<String>) {
 
     private var text: Array<String>
 
     init {
-        text = _text
+        this.text = text
     }
 
     fun parser(): Parser {

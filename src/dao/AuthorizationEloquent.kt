@@ -1,51 +1,66 @@
 package dao
 
-import services.Connection
 import models.Roles
+import services.Connection
+import java.lang.Exception
 
-class AuthorizationEloquent(_resource: String = "", _role: Roles = Roles.READ, _conn: Connection = Connection()) {
+class AuthorizationEloquent(resource: String = "", role: Roles = Roles.READ) {
 
-    private val сonn: Connection
+    private val сonn: Connection = Connection()
     private val resource: String
     private val role: Roles
 
     init {
-        сonn = _conn
-        resource = _resource
-        role = _role
+        this.resource = resource
+        this.role = role
     }
 
     /**
      * Имеет ли доступ к ресурсу
      */
     fun isCheckResourceAccess(login: String): Boolean {
-        сonn.connection().let {
+
+        try {
             val sql = "SELECT c.login, r.role, rs.ress FROM customer as c " +
                     "INNER JOIN role as r ON r.login_customer = c.login " +
                     "INNER JOIN resource as rs ON rs.id_role = r.id " +
                     "WHERE c.login = ? " +
                     "AND r.role = ?"
 
-            val userData = it.prepareStatement(sql).let {
-                it.setString(1, login)
-                it.setString(2, role.toString())
+            val userStatement = сonn.connection().prepareStatement(sql)
 
-                it.executeQuery()
-            }
+            userStatement.setString(1, login)
+            userStatement.setString(2, role.toString())
 
+            try {
+                val userResult = userStatement.executeQuery()
 
-            while (userData.next()) {
-                val lengthDateRes = userData.getString("ress").length
+                try {
+                    while (userResult.next()) {
+                        val lengthDateRes = userResult.getString("ress").length
 
-                if (resource.length >= lengthDateRes) {
-                    if (userData.getString("ress") == resource.substring(0, lengthDateRes)
-                        && (lengthDateRes == resource.length || resource[lengthDateRes] == '.')
-                    ) {
-                        it.close()
-                        return true
+                        if (resource.length >= lengthDateRes) {
+                            if (userResult.getString("ress") == resource.substring(0, lengthDateRes)
+                                && (lengthDateRes == resource.length || resource[lengthDateRes] == '.')
+                            ) {
+                                return true
+                            }
+                        }
                     }
+                } catch (e: Exception) {
+                    throw Exception("Error in working with the request")
+                } finally {
+                    userResult.close()
                 }
+            } catch (e: Exception) {
+                throw Exception("Request for non-fulfillment")
+            } finally {
+                userStatement.close()
             }
+        } catch (e: Exception) {
+            throw Exception("No connection")
+        } finally {
+            сonn.connection().close()
         }
         return false
     }

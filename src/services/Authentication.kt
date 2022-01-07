@@ -7,12 +7,12 @@ import java.math.BigInteger
 import java.security.MessageDigest
 import models.Parser
 
-class Authentication(_parser: Parser) {
+class Authentication(parser: Parser) {
 
     private val parser: Parser
 
     init {
-        parser = _parser
+        this.parser = parser
     }
 
     /**

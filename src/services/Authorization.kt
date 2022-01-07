@@ -9,12 +9,12 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import models.Parser
 
-class Authorization(_parser: Parser) {
+class Authorization(parser: Parser) {
 
     private val parser: Parser
 
     init {
-        parser = _parser
+        this.parser = parser
     }
 
     private val datePattern = "\\d{4}-\\d{2}-\\d{2}"

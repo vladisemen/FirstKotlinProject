@@ -2,15 +2,16 @@ package dao
 
 import services.Connection
 import models.User
+import java.lang.Exception
+import java.sql.DriverManager
 
-class AuthenticationEloquent(_login: String, _conn: Connection = Connection()) {
+class AuthenticationEloquent(login: String) {
 
-    private val сonn: Connection
+    private val сonn: Connection = Connection()
     private val login: String
 
     init {
-        сonn = _conn
-        login = _login
+        this.login = login
     }
 
     /**
@@ -24,24 +25,44 @@ class AuthenticationEloquent(_login: String, _conn: Connection = Connection()) {
      * Найдет и вернет юзера по логину
      */
     fun findUserByLogin(): User? {
-        сonn.connection().let {
+
+        try {
             val sql = "SELECT * FROM customer WHERE LOGIN = ?"
 
-            val userData = it.prepareStatement(sql).let {
-                it.setString(1, this.login)
-                it.executeQuery()
-            }
+            val userStatement = сonn.connection().prepareStatement(sql)
+            userStatement.setString(1, this.login)
 
-            while (userData.next()) {
-                if (userData.getString("login") == this.login) {
-                    val result =
-                        User(userData.getString("login"), userData.getString("pass"), userData.getString("salt"))
-                    it.close()
+            try {
+                val userResult = userStatement.executeQuery()
 
-                    return result
+                try {
+                    while (userResult.next()) {
+                        if (userResult.getString("login") == this.login) {
+                            val result = User(
+                                userResult.getString("userResult"),
+                                userResult.getString("pass"),
+                                userResult.getString("salt")
+                            )
+                            return result
+                        }
+                    }
+                } catch (e: Exception) {
+                    throw Exception("Error in working with the request")
+                } finally {
+                    userResult.close()
                 }
+            } catch (e: Exception) {
+                throw Exception("Request for non-fulfillment")
+            } finally {
+                userStatement.close()
             }
+        } catch (e: Exception) {
+            throw Exception("No connection")
+        } finally {
+            сonn.connection().close()
         }
         return null
     }
 }
+
+
